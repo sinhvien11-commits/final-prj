@@ -1,0 +1,258 @@
+<!-- Esports Hub - Trạng thái & Tìm đội (Premium) v2 -->
+<!DOCTYPE html><html class="dark" lang="vi"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Esports Hub &amp; Trạng Thái</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&amp;family=Montserrat:wght@700;800&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-bright": "#393939",
+                        "secondary": "#c8c6c5",
+                        "on-primary": "#1e3700",
+                        "inverse-primary": "#3f6900",
+                        "surface-container-highest": "#353535",
+                        "primary-fixed": "#9cfb00",
+                        "primary": "#ffffff",
+                        "secondary-container": "#474746",
+                        "on-tertiary": "#313030",
+                        "tertiary-container": "#e5e2e1",
+                        "outline-variant": "#404a34",
+                        "on-error-container": "#ffdad6",
+                        "on-background": "#e2e2e2",
+                        "inverse-on-surface": "#303030",
+                        "primary-fixed-dim": "#88dc00",
+                        "on-primary-fixed-variant": "#2e4f00",
+                        "on-secondary-fixed-variant": "#474746",
+                        "surface-dim": "#131313",
+                        "surface": "#131313",
+                        "on-error": "#690005",
+                        "surface-container-lowest": "#0e0e0e",
+                        "surface-container": "#1f1f1f",
+                        "error": "#ffb4ab",
+                        "secondary-fixed-dim": "#c8c6c5",
+                        "on-tertiary-fixed": "#1c1b1b",
+                        "on-surface": "#e2e2e2",
+                        "on-secondary": "#313030",
+                        "on-tertiary-container": "#656464",
+                        "surface-tint": "#88dc00",
+                        "tertiary": "#ffffff",
+                        "surface-variant": "#353535",
+                        "tertiary-fixed-dim": "#c8c6c5",
+                        "outline": "#8a947a",
+                        "on-surface-variant": "#c0cbad",
+                        "on-primary-fixed": "#0f2000",
+                        "on-primary-container": "#437000",
+                        "inverse-surface": "#e2e2e2",
+                        "tertiary-fixed": "#e5e2e1",
+                        "primary-container": "#9cfb00",
+                        "background": "#131313",
+                        "on-secondary-fixed": "#1c1b1b",
+                        "error-container": "#93000a",
+                        "surface-container-high": "#2a2a2a",
+                        "on-tertiary-fixed-variant": "#474646",
+                        "on-secondary-container": "#b7b5b4",
+                        "surface-container-low": "#1b1b1b",
+                        "secondary-fixed": "#e5e2e1"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "stack-sm": "8px",
+                        "margin-mobile": "20px",
+                        "stack-md": "16px",
+                        "gutter": "12px",
+                        "unit": "4px",
+                        "stack-lg": "24px"
+                    },
+                    "fontFamily": {
+                        "label-sm": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "label-bold": ["Inter"],
+                        "body-md": ["Inter"],
+                        "headline-lg": ["Montserrat"],
+                        "headline-xl": ["Montserrat"],
+                        "headline-md": ["Montserrat"]
+                    },
+                    "fontSize": {
+                        "label-sm": ["11px", { "lineHeight": "1.2", "fontWeight": "500" }],
+                        "body-lg": ["16px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "label-bold": ["12px", { "lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "700" }],
+                        "body-md": ["14px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "headline-lg": ["24px", { "lineHeight": "1.2", "fontWeight": "700" }],
+                        "headline-xl": ["32px", { "lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+                        "headline-md": ["20px", { "lineHeight": "1.2", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .neon-text-primary {
+            text-shadow: 0 0 10px rgba(158, 255, 0, 0.5), 0 0 20px rgba(158, 255, 0, 0.3);
+        }
+        .neon-border-primary {
+            box-shadow: inset 0 0 10px rgba(158, 255, 0, 0.2), 0 0 15px rgba(158, 255, 0, 0.3);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen antialiased flex flex-col font-body-md">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 flex justify-between items-center px-margin-mobile h-16 bg-surface/80 backdrop-blur-xl border-b border-surface-variant">
+<div class="flex items-center gap-2"><button class="text-primary-fixed hover:text-primary-fixed transition-colors duration-200 active:scale-95">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<div class="flex items-center gap-1 font-label-bold text-label-bold">
+<span class="text-primary-fixed">VI</span>
+<span class="text-secondary">|</span>
+<span class="text-secondary">EN</span>
+</div></div>
+<div class="absolute left-1/2 -translate-x-1/2"><span class="font-headline-md text-headline-md font-bold text-primary uppercase tracking-tighter">OEG CYBER HUB</span></div>
+<button class="text-primary-fixed hover:text-primary-fixed transition-colors duration-200 active:scale-95">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-1 mt-16 pb-28 px-margin-mobile pt-stack-md flex flex-col gap-stack-lg max-w-4xl mx-auto w-full">
+<!-- Khối trạng thái máy -->
+<section class="bg-surface-container-high rounded-xl p-stack-lg border border-surface-variant flex flex-col items-center relative overflow-hidden">
+<div class="absolute inset-0 opacity-10 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-primary-fixed via-background to-background"></div>
+<div class="relative z-10 flex flex-col items-center text-center">
+<div class="bg-surface-container-highest px-4 py-1 rounded-full border border-primary-fixed/30 mb-stack-sm flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-primary-fixed animate-pulse"></span>
+<span class="font-label-bold text-label-bold text-primary-fixed tracking-wider">ĐANG CHƠI</span>
+</div>
+<h1 class="font-headline-xl text-headline-xl text-primary mb-stack-sm uppercase tracking-tight">Ghế A12</h1>
+<div class="font-headline-xl text-[48px] font-extrabold text-primary-fixed neon-text-primary tabular-nums tracking-tighter mb-stack-lg">
+                    02:38:22
+                </div>
+<div class="flex flex-col sm:flex-row w-full gap-stack-md">
+<button class="flex-1 bg-primary-fixed text-on-primary-fixed font-label-bold text-label-bold py-3 px-6 rounded-lg uppercase tracking-wider hover:bg-primary-fixed-dim transition-colors shadow-[0px_0px_15px_rgba(158,255,0,0.3)] active:scale-95 flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[18px]">add_circle</span>
+                        GIA HẠN THÊM GIỜ
+                    </button>
+<button class="flex-1 bg-surface-container text-on-background font-label-bold text-label-bold py-3 px-6 rounded-lg uppercase tracking-wider border border-surface-variant hover:border-primary-fixed/50 hover:text-primary-fixed transition-colors active:scale-95 flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[18px]">support_agent</span>
+                        GỌI HỖ TRỢ KỸ THUẬT
+                    </button>
+</div>
+</div>
+</section>
+<!-- Khối cấu hình máy -->
+<section>
+<h2 class="font-label-bold text-label-bold text-secondary uppercase tracking-widest mb-stack-md flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px]">memory</span>
+                Cấu hình máy
+            </h2>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-stack-sm">
+<!-- CPU -->
+<div class="bg-surface-container-low rounded-lg p-stack-md border border-surface-variant flex flex-col justify-between">
+<span class="font-label-sm text-label-sm text-secondary uppercase mb-1">CPU</span>
+<span class="font-label-bold text-label-bold text-on-background">Intel Core i9</span>
+<span class="text-[10px] text-secondary mt-1">14900KF</span>
+</div>
+<!-- VGA -->
+<div class="bg-surface-container-low rounded-lg p-stack-md border border-surface-variant flex flex-col justify-between">
+<span class="font-label-sm text-label-sm text-secondary uppercase mb-1">VGA</span>
+<span class="font-label-bold text-label-bold text-on-background text-primary-fixed">RTX 4090</span>
+<span class="text-[10px] text-secondary mt-1">24GB GDDR6X</span>
+</div>
+<!-- RAM -->
+<div class="bg-surface-container-low rounded-lg p-stack-md border border-surface-variant flex flex-col justify-between">
+<span class="font-label-sm text-label-sm text-secondary uppercase mb-1">RAM</span>
+<span class="font-label-bold text-label-bold text-on-background">64GB DDR5</span>
+<span class="text-[10px] text-secondary mt-1">6000MHz</span>
+</div>
+<!-- Monitor -->
+<div class="bg-surface-container-low rounded-lg p-stack-md border border-surface-variant flex flex-col justify-between">
+<span class="font-label-sm text-label-sm text-secondary uppercase mb-1">MÀN HÌNH</span>
+<span class="font-label-bold text-label-bold text-on-background">360Hz 1ms</span>
+<span class="text-[10px] text-secondary mt-1">ZOWIE XL2566K</span>
+</div>
+</div>
+</section>
+<!-- Khối Tìm đồng đội - LFG -->
+<section class="flex flex-col gap-stack-md">
+<div class="flex justify-between items-end border-b border-surface-variant pb-2">
+<h2 class="font-headline-md text-headline-md text-primary tracking-tight flex items-center gap-2">
+<span class="material-symbols-outlined text-primary-fixed">group_add</span>
+                    TÌM ĐỒNG ĐỘI (LFG)
+                </h2>
+<button class="text-primary-fixed font-label-bold text-label-bold hover:text-primary-fixed-dim uppercase tracking-wider flex items-center gap-1 active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-[16px]">add</span>
+                    TẠO PHÒNG MỚI
+                </button>
+</div>
+<div class="flex flex-col gap-stack-sm">
+<!-- Room 1 -->
+<div class="bg-surface-container rounded-lg p-stack-md border border-surface-variant hover:border-primary-fixed/30 transition-colors flex flex-col sm:flex-row justify-between items-start sm:items-center gap-stack-md">
+<div class="flex items-center gap-stack-md w-full sm:w-auto">
+<div class="w-12 h-12 rounded bg-surface-container-highest flex items-center justify-center border border-surface-variant overflow-hidden shrink-0">
+<img class="w-full h-full object-cover opacity-80" data-alt="A stylized, high-contrast flat icon representing a popular tactical shooter video game, rendered in a striking red and stark white palette. The design is minimalistic and aggressive, suitable for a dark-mode esports interface." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBI9mExVWzUy3PTnGWsi8nepnEX5GrMSCNg4QJ-_FPdvGLxSp_ndhMCw-Zdq8JSGnRramD-Q6ShdxLSegNLCMF76V1sU-I93FFuD9U8jNKp6bmftXzMyFheBgdhZi_adF4TIBCi6bhTPkROZHYkWPcvRZaq6FZdepTiFPi2avQn2yZb8_2q1POGg4_MfOMbDvxIPoRW1O4I0Bx8ud0BTWQsrhAJfzmiBtWVa7YBMjD_Kh8bqTRkxOdb9jR_pQTN9abtr-6Idczre8o">
+</div>
+<div class="flex flex-col">
+<h3 class="font-label-bold text-label-bold text-primary text-[14px]">Valorant Tryhard Rank Đêm</h3>
+<div class="flex items-center gap-2 mt-1">
+<span class="bg-surface-container-highest text-secondary text-[10px] px-2 py-0.5 rounded uppercase font-label-sm border border-surface-variant">Bạch Kim+</span>
+<span class="text-secondary text-[11px] flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px]">mic</span> Voice Comms
+                                </span>
+</div>
+</div>
+</div>
+<div class="flex items-center justify-between w-full sm:w-auto gap-stack-md border-t border-surface-variant pt-3 sm:border-t-0 sm:pt-0">
+<div class="flex items-center gap-1 text-on-background">
+<span class="material-symbols-outlined text-[16px] text-primary-fixed">person</span>
+<span class="font-label-bold text-[14px]">4<span class="text-secondary font-normal">/5</span></span>
+</div>
+<button class="bg-surface text-primary-fixed font-label-bold text-label-bold py-2 px-4 rounded border border-primary-fixed/50 hover:bg-primary-fixed/10 transition-colors neon-border-primary uppercase tracking-wider text-[11px]">
+                            THAM GIA PHÒNG
+                        </button>
+</div>
+</div>
+<!-- Room 2 -->
+<div class="bg-surface-container rounded-lg p-stack-md border border-surface-variant hover:border-primary-fixed/30 transition-colors flex flex-col sm:flex-row justify-between items-start sm:items-center gap-stack-md">
+<div class="flex items-center gap-stack-md w-full sm:w-auto">
+<div class="w-12 h-12 rounded bg-surface-container-highest flex items-center justify-center border border-surface-variant overflow-hidden shrink-0">
+<img class="w-full h-full object-cover opacity-80" data-alt="A sleek, minimalist icon depicting a multiplayer online battle arena (MOBA) game logo, utilizing a dark metallic texture with glowing blue neon accents, set against a pure black background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCS4dffAlcJ-sKretvsqOqVkBlu44F3cxHAAKQ1rRZw8UTp_MPWBncSEWGVfVZ80UgKN11-n1i0WhLYSxvybU5mXhEJYRpDl7793pat9eIvbuVkYgBb_NE6GhVgZIcP3_A8fYDlFEO9pwtN2a1dZvSUKlYXLcos_xkBUK_dZ8ecaf2Q3DkJ0qRqYNT6Lps2aWmedIgaZUKoIa9ZveDB8OVEGfKJAx3wsjJFUwb8HfvoFjcMqx4efGzYiSCvBiH-sWt3oAqamWCUAIU">
+</div>
+<div class="flex flex-col">
+<h3 class="font-label-bold text-label-bold text-primary text-[14px]">LMHT Cày thuê Flex</h3>
+<div class="flex items-center gap-2 mt-1">
+<span class="bg-surface-container-highest text-secondary text-[10px] px-2 py-0.5 rounded uppercase font-label-sm border border-surface-variant">Lục Bảo</span>
+<span class="text-secondary text-[11px] flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px]">chat</span> Chat Only
+                                </span>
+</div>
+</div>
+</div>
+<div class="flex items-center justify-between w-full sm:w-auto gap-stack-md border-t border-surface-variant pt-3 sm:border-t-0 sm:pt-0">
+<div class="flex items-center gap-1 text-on-background">
+<span class="material-symbols-outlined text-[16px] text-primary-fixed">person</span>
+<span class="font-label-bold text-[14px]">2<span class="text-secondary font-normal">/5</span></span>
+</div>
+<button class="bg-surface text-primary-fixed font-label-bold text-label-bold py-2 px-4 rounded border border-primary-fixed/50 hover:bg-primary-fixed/10 transition-colors neon-border-primary uppercase tracking-wider text-[11px]">
+                            THAM GIA PHÒNG
+                        </button>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar -->
+
+<!-- Desktop Navigation (Hidden on mobile, just mapping structure) -->
+
+
+
+</body></html>

@@ -1,0 +1,226 @@
+<!-- Trang chủ - Khám phá Cơ sở (Premium Redesign) -->
+<!DOCTYPE html><html class="dark" lang="vi" style=""><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Trang chủ &amp; Khám phá cơ sở</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&amp;family=Montserrat:wght@700;800;900&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-bright": "#393939",
+                        "secondary": "#c8c6c5",
+                        "on-primary": "#1e3700",
+                        "inverse-primary": "#3f6900",
+                        "surface-container-highest": "#353535",
+                        "primary-fixed": "#9EFF00",
+                        "primary": "#ffffff",
+                        "secondary-container": "#474746",
+                        "on-tertiary": "#313030",
+                        "tertiary-container": "#e5e2e1",
+                        "outline-variant": "#404a34",
+                        "on-error-container": "#ffdad6",
+                        "on-background": "#e2e2e2",
+                        "inverse-on-surface": "#303030",
+                        "primary-fixed-dim": "#88dc00",
+                        "on-primary-fixed-variant": "#2e4f00",
+                        "on-secondary-fixed-variant": "#474746",
+                        "surface-dim": "#131313",
+                        "surface": "#131313",
+                        "on-error": "#690005",
+                        "surface-container-lowest": "#0e0e0e",
+                        "surface-container": "#1f1f1f",
+                        "error": "#ffb4ab",
+                        "secondary-fixed-dim": "#c8c6c5",
+                        "on-tertiary-fixed": "#1c1b1b",
+                        "on-surface": "#e2e2e2",
+                        "on-secondary": "#313030",
+                        "on-tertiary-container": "#656464",
+                        "surface-tint": "#88dc00",
+                        "tertiary": "#ffffff",
+                        "surface-variant": "#353535",
+                        "tertiary-fixed-dim": "#c8c6c5",
+                        "outline": "#8a947a",
+                        "on-surface-variant": "#c0cbad",
+                        "on-primary-fixed": "#0f2000",
+                        "on-primary-container": "#437000",
+                        "inverse-surface": "#e2e2e2",
+                        "tertiary-fixed": "#e5e2e1",
+                        "primary-container": "#9EFF00",
+                        "background": "#0B0B0B",
+                        "on-secondary-fixed": "#1c1b1b",
+                        "error-container": "#93000a",
+                        "surface-container-high": "#2a2a2a",
+                        "on-tertiary-fixed-variant": "#474646",
+                        "on-secondary-container": "#b7b5b4",
+                        "surface-container-low": "#1b1b1b",
+                        "secondary-fixed": "#e5e2e1"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "stack-sm": "8px",
+                        "margin-mobile": "20px",
+                        "stack-md": "16px",
+                        "gutter": "12px",
+                        "unit": "4px",
+                        "stack-lg": "24px"
+                    },
+                    "fontFamily": {
+                        "label-sm": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "label-bold": ["Inter"],
+                        "body-md": ["Inter"],
+                        "headline-lg": ["Montserrat"],
+                        "headline-xl": ["Montserrat"],
+                        "headline-md": ["Montserrat"]
+                    },
+                    "fontSize": {
+                        "label-sm": ["11px", { "lineHeight": "1.2", "fontWeight": "500" }],
+                        "body-lg": ["16px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "label-bold": ["12px", { "lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "700" }],
+                        "body-md": ["14px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "headline-lg": ["24px", { "lineHeight": "1.2", "fontWeight": "700" }],
+                        "headline-xl": ["32px", { "lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+                        "headline-md": ["20px", { "lineHeight": "1.2", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body {
+            background-color: #0B0B0B;
+            color: #e2e2e2;
+        }
+        
+        .neon-glow {
+            box-shadow: 0px 0px 15px rgba(158, 255, 0, 0.3);
+        }
+        
+        .neon-text-glow {
+            text-shadow: 0px 0px 8px rgba(158, 255, 0, 0.8);
+        }
+
+        .cyber-border {
+            border: 1px solid #2A2A2A;
+        }
+        
+        .cyber-border-active {
+            border: 1.5px solid #9EFF00;
+        }
+
+        /* Base scrollbar styling */
+        ::-webkit-scrollbar {
+            width: 4px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #2a2a2a; 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #9EFF00; 
+        }
+    </style>
+</head>
+<body class="antialiased min-h-screen flex flex-col font-body-md relative overflow-x-hidden pt-16 pb-28">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 flex justify-between items-center px-margin-mobile h-16 bg-[#0B0B0B]/80 backdrop-blur-xl border-b border-white/5">
+<button class="text-primary-fixed hover:text-primary-fixed transition-colors duration-200"><span class="font-bold text-sm tracking-wider"><span class="text-primary-fixed">VI</span> <span class="text-white/40">|</span> <span class="text-white/60">EN</span></span></button>
+<h1 class="font-headline-md text-base font-bold text-white uppercase tracking-[0.2em] absolute left-1/2 -translate-x-1/2">OEG CYBER HUB</h1>
+<button class="text-secondary opacity-60 hover:text-primary-fixed transition-colors duration-200"><span class="material-symbols-outlined text-white/70" style="font-variation-settings: &quot;FILL&quot; 0, &quot;wght&quot; 300;">notifications</span></button>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-grow px-margin-mobile py-stack-lg pb-32 flex flex-col gap-stack-lg relative z-10 max-w-4xl mx-auto w-full">
+<!-- Section Header -->
+<div class="flex justify-between items-center border-b border-white/10 pb-stack-sm">
+<h2 class="font-headline-lg text-[26px] font-bold text-white tracking-tight">Khám phá cơ sở</h2>
+<button class="w-12 h-12 flex items-center justify-center rounded-full bg-[#1A1A1A] hover:bg-surface-bright transition-colors border border-white/5">
+<span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 0;">tune</span>
+</button>
+</div>
+<!-- Facility Card -->
+<article class="bg-[#1A1A1A] cyber-border rounded-[20px] overflow-hidden flex flex-col relative group transition-all duration-300 shadow-xl">
+<div class="p-6 flex flex-col gap-4 relative z-20">
+<!-- Header: Name & Status -->
+<div class="flex justify-between items-start gap-4">
+<h3 class="font-headline-xl text-[40px] text-white font-black leading-[0.9] uppercase tracking-tighter w-1/2 break-words">175 TRẦN<br>QUỐC<br>HOÀN</h3>
+<div class="border border-primary-fixed rounded-full px-4 py-1.5 flex items-center gap-2 mt-1 shadow-[0px_0px_10px_rgba(158,255,0,0.1)]">
+<div class="w-2 h-2 rounded-full bg-primary-fixed animate-pulse"></div>
+<span class="font-bold text-[11px] text-primary-fixed tracking-wider uppercase whitespace-nowrap pt-0.5">ĐANG MỞ CỬA</span>
+</div>
+</div>
+<!-- Hardware Specs Grid -->
+<div class="grid grid-cols-3 gap-0 py-4 mt-2 border-b border-white/10">
+<div class="flex flex-col pr-4">
+<span class="text-[11px] text-secondary uppercase tracking-widest opacity-70 mb-1">Sức chứa</span>
+<span class="text-base text-white font-medium">98 Máy</span>
+</div>
+<div class="flex flex-col px-4 border-l border-white/10">
+<span class="text-[11px] text-secondary uppercase tracking-widest opacity-70 mb-1">Diện tích</span>
+<span class="text-base text-white font-medium">80 m2</span>
+</div>
+<div class="flex flex-col pl-4 border-l border-white/10">
+<span class="text-[11px] text-secondary uppercase tracking-widest opacity-70 mb-1">Số tầng</span>
+<span class="text-base text-white font-medium">5 Tầng</span>
+</div>
+</div>
+<!-- Real-time Stats -->
+<div class="flex flex-col gap-3 py-2">
+<div class="flex justify-between items-center">
+<span class="font-bold text-sm text-white">Tỷ lệ lấp đầy: 87%</span>
+<span class="text-xs text-secondary opacity-80">(Đang có 85 Máy Chơi)</span>
+</div>
+<!-- Progress Bar -->
+<div class="w-full h-1.5 bg-[#2A2A2A] rounded-full overflow-hidden">
+<div class="h-full bg-primary-fixed rounded-full shadow-[0px_0px_10px_rgba(158,255,0,0.5)] relative" style="width: 87%;"></div>
+</div>
+<div class="flex items-center gap-2 mt-2">
+<span class="material-symbols-outlined text-primary-fixed text-sm" style="font-variation-settings: 'FILL' 1;">wifi</span>
+<span class="font-bold text-xs text-primary-fixed uppercase tracking-wider neon-text-glow">PING HỆ THỐNG: 4ms</span>
+</div>
+</div>
+<!-- Action Buttons -->
+<div class="grid grid-cols-2 gap-4 mt-2 z-30">
+<button class="bg-transparent border border-primary-fixed text-primary-fixed font-bold text-xs py-3.5 rounded-lg uppercase tracking-wider hover:bg-primary-fixed hover:text-black transition-colors duration-200 shadow-[0px_0px_10px_rgba(158,255,0,0.15)]">
+                        XEM THÔNG TIN
+                    </button>
+<button class="bg-[#1A1A1A] border border-white/10 text-white font-bold text-xs py-3.5 rounded-lg uppercase tracking-wider hover:border-white/30 transition-colors duration-200 flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 0;">map</span>
+                        XEM BẢN ĐỒ
+                    </button>
+</div>
+</div>
+<!-- Facility Image (Bottom) -->
+<div class="relative w-full h-48 -mt-2">
+<div class="absolute inset-0 bg-gradient-to-t from-[#1A1A1A] via-transparent to-transparent z-10 pointer-events-none"></div>
+<img class="w-full h-full object-cover rounded-b-[20px]" data-alt="Cyber cafe interior" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCcI6pM1HAwbDQ8JiD7FtEc7SGTXcwfv0tdFzCQEAbUaFZPs2pj1ffl0QdMGoh6yx00stJFOXGHTt1q7o2NbHR6YvtInQaYAtwTNB_XkCWHrscUQSo95Q8W6uXH5ETnKpOdNpGPBWJ6VBBe58722_DwxWIO_m2QM4M3ZB0jykcnrhrRzWzk2ntm0pjC40uBPVVbYHHpSMISHSHmrBVsOpNfIPDdJhx4yVtiaj2EDMV5tgd_rixY1LdalVUvMpk3Hi-DVBqQd3B3hYg">
+</div>
+</article>
+</main>
+<!-- BottomNavBar -->
+
+<!-- Desktop Navigation Overlay (Hidden on Mobile) -->
+<div class="hidden md:flex fixed top-0 right-0 h-16 items-center px-margin-mobile z-50 gap-stack-lg mr-12 pointer-events-none">
+<div class="flex gap-stack-md pointer-events-auto bg-surface-container/90 backdrop-blur-md px-6 py-2 rounded-full border border-surface-variant">
+<button class="text-primary-fixed font-label-bold text-label-bold uppercase tracking-widest neon-text-glow">Trang chủ</button>
+<button class="text-secondary opacity-60 hover:opacity-100 hover:text-primary-fixed font-label-bold text-label-bold uppercase tracking-widest transition-all">Cửa hàng</button>
+<button class="text-secondary opacity-60 hover:opacity-100 hover:text-primary-fixed font-label-bold text-label-bold uppercase tracking-widest transition-all">Esports</button>
+<button class="text-secondary opacity-60 hover:opacity-100 hover:text-primary-fixed font-label-bold text-label-bold uppercase tracking-widest transition-all">Nhiệm vụ</button>
+<button class="text-secondary opacity-60 hover:opacity-100 hover:text-primary-fixed font-label-bold text-label-bold uppercase tracking-widest transition-all">Hồ sơ</button>
+</div>
+</div>
+
+
+</body></html>

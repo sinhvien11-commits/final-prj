@@ -1,0 +1,255 @@
+<!-- Cyber Mart - Dashboard (Premium) v2 -->
+<!DOCTYPE html><html class="dark" lang="vi"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Cyber Mart &amp; Đơn hàng - OEG CYBER HUB</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&amp;family=Montserrat:wght@700;800&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-bright": "#393939",
+                        "secondary": "#c8c6c5",
+                        "on-primary": "#1e3700",
+                        "inverse-primary": "#3f6900",
+                        "surface-container-highest": "#353535",
+                        "primary-fixed": "#9cfb00",
+                        "primary": "#ffffff",
+                        "secondary-container": "#474746",
+                        "on-tertiary": "#313030",
+                        "tertiary-container": "#e5e2e1",
+                        "outline-variant": "#404a34",
+                        "on-error-container": "#ffdad6",
+                        "on-background": "#e2e2e2",
+                        "inverse-on-surface": "#303030",
+                        "primary-fixed-dim": "#88dc00",
+                        "on-primary-fixed-variant": "#2e4f00",
+                        "on-secondary-fixed-variant": "#474746",
+                        "surface-dim": "#131313",
+                        "surface": "#131313",
+                        "on-error": "#690005",
+                        "surface-container-lowest": "#0e0e0e",
+                        "surface-container": "#1f1f1f",
+                        "error": "#ffb4ab",
+                        "secondary-fixed-dim": "#c8c6c5",
+                        "on-tertiary-fixed": "#1c1b1b",
+                        "on-surface": "#e2e2e2",
+                        "on-secondary": "#313030",
+                        "on-tertiary-container": "#656464",
+                        "surface-tint": "#88dc00",
+                        "tertiary": "#ffffff",
+                        "surface-variant": "#353535",
+                        "tertiary-fixed-dim": "#c8c6c5",
+                        "outline": "#8a947a",
+                        "on-surface-variant": "#c0cbad",
+                        "on-primary-fixed": "#0f2000",
+                        "on-primary-container": "#437000",
+                        "inverse-surface": "#e2e2e2",
+                        "tertiary-fixed": "#e5e2e1",
+                        "primary-container": "#9cfb00",
+                        "background": "#131313",
+                        "on-secondary-fixed": "#1c1b1b",
+                        "error-container": "#93000a",
+                        "surface-container-high": "#2a2a2a",
+                        "on-tertiary-fixed-variant": "#474646",
+                        "on-secondary-container": "#b7b5b4",
+                        "surface-container-low": "#1b1b1b",
+                        "secondary-fixed": "#e5e2e1"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "stack-sm": "8px",
+                        "margin-mobile": "20px",
+                        "stack-md": "16px",
+                        "gutter": "12px",
+                        "unit": "4px",
+                        "stack-lg": "24px"
+                    },
+                    "fontFamily": {
+                        "label-sm": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "label-bold": ["Inter"],
+                        "body-md": ["Inter"],
+                        "headline-lg": ["Montserrat"],
+                        "headline-xl": ["Montserrat"],
+                        "headline-md": ["Montserrat"]
+                    },
+                    "fontSize": {
+                        "label-sm": ["11px", { "lineHeight": "1.2", "fontWeight": "500" }],
+                        "body-lg": ["16px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "label-bold": ["12px", { "lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "700" }],
+                        "body-md": ["14px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "headline-lg": ["24px", { "lineHeight": "1.2", "fontWeight": "700" }],
+                        "headline-xl": ["32px", { "lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+                        "headline-md": ["20px", { "lineHeight": "1.2", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body {
+            background-color: #000000;
+            color: #e2e2e2;
+        }
+        
+        /* Custom Scrollbar for Horizontal Lists */
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        /* Neon Glow Utility */
+        .neon-glow {
+            box-shadow: 0px 0px 15px rgba(158, 255, 0, 0.3);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen flex flex-col pt-16 pb-28 md:pt-20 md:pb-0 font-body-md">
+<!-- TopAppBar -->
+<header class="bg-surface/80 backdrop-blur-xl border-b border-surface-variant flat no shadows fixed top-0 w-full z-50 flex justify-between items-center px-margin-mobile h-16">
+<button class="flex items-center justify-center w-10 h-10 rounded-full hover:bg-surface-container transition-colors"><span class="font-label-bold text-label-bold"><span class="text-primary-fixed">VI</span> <span class="text-secondary">|</span> <span class="text-primary">EN</span></span></button>
+<h1 class="font-headline-md text-headline-md font-bold text-primary uppercase tracking-tighter">OEG CYBER HUB</h1>
+<button class="flex items-center justify-center w-10 h-10 rounded-full hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined text-primary" data-icon="notifications">notifications</span>
+</button>
+</header>
+<!-- Main Canvas -->
+<main class="flex-1 flex flex-col px-margin-mobile w-full max-w-4xl mx-auto space-y-stack-lg mt-stack-md pb-32">
+<!-- Active Order Widget -->
+<section class="bg-[#1A1A1A] border border-[#2A2A2A] rounded-xl p-stack-md flex flex-col space-y-stack-md">
+<div class="flex justify-between items-start">
+<div>
+<h2 class="font-headline-md text-headline-md text-primary">Đơn hàng #9021</h2>
+<p class="font-body-md text-body-md text-secondary mt-1">Giao tới Máy 42 - VIP Room</p>
+</div>
+<div class="bg-[#1A1A1A] border border-primary-fixed rounded-full px-3 py-1 flex items-center space-x-1">
+<span class="material-symbols-outlined text-primary-fixed text-[16px]" data-icon="timer">timer</span>
+<span class="font-label-bold text-label-bold text-primary-fixed">~12 phút</span>
+</div>
+</div>
+<!-- Progress Tracker -->
+<div class="relative pt-4 pb-2">
+<!-- Track Background -->
+<div class="absolute top-1/2 -translate-y-1/2 left-0 w-full h-[8px] bg-[#1A1A1A] rounded-full z-0 overflow-hidden">
+<!-- Progress Fill -->
+<div class="h-full bg-primary-fixed w-1/2 shadow-[0_0_10px_rgba(158,255,0,0.5)]"></div>
+</div>
+<!-- Steps -->
+<div class="relative z-10 flex justify-between items-center">
+<div class="flex flex-col items-center">
+<div class="w-4 h-4 rounded-full bg-primary-fixed shadow-[0_0_10px_rgba(158,255,0,0.5)]"></div>
+<span class="font-label-sm text-label-sm text-primary mt-2">Đã nhận</span>
+</div>
+<div class="flex flex-col items-center">
+<div class="w-4 h-4 rounded-full bg-primary-fixed shadow-[0_0_10px_rgba(158,255,0,0.5)]"></div>
+<span class="font-label-sm text-label-sm text-primary mt-2">Đang chuẩn bị</span>
+</div>
+<div class="flex flex-col items-center">
+<div class="w-4 h-4 rounded-full bg-[#1A1A1A] border-2 border-surface-variant"></div>
+<span class="font-label-sm text-label-sm text-secondary mt-2 opacity-60">Đang giao</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Category Filter (Horizontal Scroll) -->
+<section class="w-full overflow-x-auto hide-scrollbar -mx-margin-mobile px-margin-mobile py-2">
+<div class="flex space-x-stack-sm min-w-max">
+<button class="bg-primary-fixed text-[#000000] font-label-bold text-label-bold px-4 py-2 rounded-full neon-glow transition-all">Tất cả</button>
+<button class="bg-[#1A1A1A] text-secondary font-label-bold text-label-bold px-4 py-2 rounded-full border border-[#2A2A2A] hover:text-primary transition-colors">Đồ ăn nhanh</button>
+<button class="bg-[#1A1A1A] text-secondary font-label-bold text-label-bold px-4 py-2 rounded-full border border-[#2A2A2A] hover:text-primary transition-colors">Nước tăng lực</button>
+<button class="bg-[#1A1A1A] text-secondary font-label-bold text-label-bold px-4 py-2 rounded-full border border-[#2A2A2A] hover:text-primary transition-colors">Combo</button>
+</div>
+</section>
+<!-- Product Grid -->
+<section class="grid grid-cols-2 gap-gutter md:grid-cols-3 lg:grid-cols-4 pb-stack-lg">
+<!-- Product Card 1 -->
+<article class="bg-[#1A1A1A] border border-[#2A2A2A] rounded-xl overflow-hidden flex flex-col">
+<div class="relative h-32 w-full bg-surface-container">
+<img alt="Cyber Energy Drink" class="object-cover w-full h-full opacity-90" data-alt="A highly stylized, hyper-realistic macro shot of a sleek, futuristic energy drink can sitting on a dark, reflective surface in a cyberpunk gaming environment. The scene is illuminated by dramatic, high-contrast neon green and purple rim lighting, highlighting the metallic texture and condensation drops on the can. The background is a deeply out-of-focus blur of high-end PC gaming hardware." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAfbUw71BLw_S5_O05jjulwCAPzsneNPIUYui7GwNgwSCl7tS6rN5XBJa6RpfaRGHGrrS4Gvpzduukb5rpJREeoGDWaMMtoEIt-BBst7a6V8fehr_f6ufeue6dNLttC1pRJGAtYMNXGdMhTekVZ8uJNoitU3NbUKvx_WWpxxVCZ9kcbZOVoQ_39CzQC5qfZ_Nb3mOdi8FeNmSvnYBAOrZgo9W3z49P7eGgshwEg4orZ_i7dy8oJXCW8iMQnq0anuCn3mwQ8e15H428">
+<div class="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-[#1A1A1A] to-transparent"></div>
+</div>
+<div class="p-stack-sm flex flex-col flex-1 justify-between">
+<div>
+<h3 class="font-label-bold text-label-bold text-primary truncate">Cyber Energy Drink</h3>
+<p class="font-label-sm text-label-sm text-secondary mt-1 flex items-center">
+<span class="material-symbols-outlined text-[14px] mr-1" data-icon="schedule">schedule</span>
+                            10-15 phút
+                        </p>
+</div>
+<div class="flex justify-between items-center mt-stack-sm">
+<span class="font-label-bold text-label-bold text-primary-fixed">35,000 đ</span>
+<button class="w-8 h-8 rounded-full bg-[#1A1A1A] border-[1.5px] border-primary-fixed flex items-center justify-center hover:bg-primary-fixed hover:text-[#000000] transition-colors group">
+<span class="material-symbols-outlined text-primary-fixed group-hover:text-[#000000] text-[18px]" data-icon="add">add</span>
+</button>
+</div>
+</div>
+</article>
+<!-- Product Card 2 -->
+<article class="bg-[#1A1A1A] border border-[#2A2A2A] rounded-xl overflow-hidden flex flex-col">
+<div class="relative h-32 w-full bg-surface-container">
+<img alt="Neon Burger Combo" class="object-cover w-full h-full opacity-90" data-alt="A mouth-watering, hyper-detailed commercial food photography shot of a premium, futuristic-looking burger in a dark, neon-lit gaming cafe. The burger features a charcoal-black bun, vibrant green lettuce, and dripping cheese, illuminated by a vivid neon green glow from below. The overall aesthetic is high-contrast, premium, and cyber-minimalist, emphasizing raw digital energy." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC_nxIgQCc-jmgIAI6ixVZr8KTJNseSZWgu2Tf-TP--dn9OPt7Kge7-2a9xQbG93dCPpdeGWhlKgYCnGhs7jCns0LsXcYevSp9AEtcN2-0foAROlEXs9RWjMpjS438j2AAG90HbOH46PkJtPWuyIju6zY4F0onq8Brwmnb5nWeZZINMVgY7fvfa8_f4YBNDqi22gpnb6PFz7Etvk6lvJnQZoWn8_ycWJPtHXXah2vI4uXwtXCaqEUoVaBfEJgImb43SneJwoUto7jU">
+<div class="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-[#1A1A1A] to-transparent"></div>
+</div>
+<div class="p-stack-sm flex flex-col flex-1 justify-between">
+<div>
+<h3 class="font-label-bold text-label-bold text-primary truncate">Neon Burger Combo</h3>
+<p class="font-label-sm text-label-sm text-secondary mt-1 flex items-center">
+<span class="material-symbols-outlined text-[14px] mr-1" data-icon="schedule">schedule</span>
+                            15-20 phút
+                        </p>
+</div>
+<div class="flex justify-between items-center mt-stack-sm">
+<span class="font-label-bold text-label-bold text-primary-fixed">85,000 đ</span>
+<button class="w-8 h-8 rounded-full bg-[#1A1A1A] border-[1.5px] border-primary-fixed flex items-center justify-center hover:bg-primary-fixed hover:text-[#000000] transition-colors group">
+<span class="material-symbols-outlined text-primary-fixed group-hover:text-[#000000] text-[18px]" data-icon="add">add</span>
+</button>
+</div>
+</div>
+</article>
+<!-- Product Card 3 (Out of stock) -->
+<article class="bg-[#1A1A1A] border border-[#2A2A2A] rounded-xl overflow-hidden flex flex-col opacity-50 grayscale pointer-events-none">
+<div class="relative h-32 w-full bg-surface-container">
+<div class="absolute inset-0 bg-[#000000]/60 z-10 flex items-center justify-center">
+<span class="bg-[#1A1A1A] text-primary font-label-bold text-label-bold px-3 py-1 rounded-full border border-[#2A2A2A]">Hết hàng</span>
+</div>
+<img alt="Crispy Chicken Wings" class="object-cover w-full h-full" data-alt="A dimly lit, moody shot of a plate of premium fried chicken pieces in a high-tech, cyberpunk-themed setting. The image is intentionally desaturated and slightly obscured, conveying a sense of unavailability or depletion within a high-contrast, dark gaming environment. Soft, fading neon accents rim the edges." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB6RgauqA7UV3MLd43Emy7YTUIwBzH7R_L_Wp3o0VDaktpF4zLOC11jdiPuhwNb6ykD1a57aCWo2uY7xUOixtAJ6IebsF_zwTXgYWKKfTC2vvibzxeWbBsOAh55s1pcqewDWHwRtUHpa_0G7OgRN2X1u5FOHAUDhzEW81p3RQIM4ARvOt5Qd2D8dzWBRrl7Rz7lWRA-x_U7uugzjA8lJs8qiAwkVqFT_btgW6jd-XUI5uG6SPQ1nceyc-PS1oea70yj3REUNeAlJAU">
+<div class="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-[#1A1A1A] to-transparent"></div>
+</div>
+<div class="p-stack-sm flex flex-col flex-1 justify-between">
+<div>
+<h3 class="font-label-bold text-label-bold text-primary truncate">Crispy Wings</h3>
+<p class="font-label-sm text-label-sm text-secondary mt-1 flex items-center">
+<span class="material-symbols-outlined text-[14px] mr-1" data-icon="schedule">schedule</span>
+                            15 phút
+                        </p>
+</div>
+<div class="flex justify-between items-center mt-stack-sm">
+<span class="font-label-bold text-label-bold text-secondary">65,000 đ</span>
+<div class="w-8 h-8 rounded-full bg-[#1A1A1A] border-[1.5px] border-[#2A2A2A] flex items-center justify-center">
+<span class="material-symbols-outlined text-[#2A2A2A] text-[18px]" data-icon="add">add</span>
+</div>
+</div>
+</div>
+</article>
+</section>
+</main>
+<!-- BottomNavBar -->
+
+<div class="hidden md:block fixed bottom-0 left-0 w-full h-24 bg-gradient-to-t from-background to-transparent pointer-events-none z-40"></div>
+
+
+</body></html>

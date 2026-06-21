@@ -1,0 +1,243 @@
+<!-- Nhiệm vụ & Phần thưởng (Premium) v2 -->
+<!DOCTYPE html><html class="dark" lang="vi"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Nhiệm vụ &amp; Phần thưởng - OEG CYBER HUB</title>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&amp;family=Montserrat:wght@100..900&amp;display=swap" rel="stylesheet">
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Config -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-bright": "#393939",
+                        "secondary": "#c8c6c5",
+                        "on-primary": "#1e3700",
+                        "inverse-primary": "#3f6900",
+                        "surface-container-highest": "#353535",
+                        "primary-fixed": "#9cfb00",
+                        "primary": "#ffffff",
+                        "secondary-container": "#474746",
+                        "on-tertiary": "#313030",
+                        "tertiary-container": "#e5e2e1",
+                        "outline-variant": "#404a34",
+                        "on-error-container": "#ffdad6",
+                        "on-background": "#e2e2e2",
+                        "inverse-on-surface": "#303030",
+                        "primary-fixed-dim": "#88dc00",
+                        "on-primary-fixed-variant": "#2e4f00",
+                        "on-secondary-fixed-variant": "#474746",
+                        "surface-dim": "#131313",
+                        "surface": "#131313",
+                        "on-error": "#690005",
+                        "surface-container-lowest": "#0e0e0e",
+                        "surface-container": "#1f1f1f",
+                        "error": "#ffb4ab",
+                        "secondary-fixed-dim": "#c8c6c5",
+                        "on-tertiary-fixed": "#1c1b1b",
+                        "on-surface": "#e2e2e2",
+                        "on-secondary": "#313030",
+                        "on-tertiary-container": "#656464",
+                        "surface-tint": "#88dc00",
+                        "tertiary": "#ffffff",
+                        "surface-variant": "#353535",
+                        "tertiary-fixed-dim": "#c8c6c5",
+                        "outline": "#8a947a",
+                        "on-surface-variant": "#c0cbad",
+                        "on-primary-fixed": "#0f2000",
+                        "on-primary-container": "#437000",
+                        "inverse-surface": "#e2e2e2",
+                        "tertiary-fixed": "#e5e2e1",
+                        "primary-container": "#9cfb00",
+                        "background": "#131313",
+                        "on-secondary-fixed": "#1c1b1b",
+                        "error-container": "#93000a",
+                        "surface-container-high": "#2a2a2a",
+                        "on-tertiary-fixed-variant": "#474646",
+                        "on-secondary-container": "#b7b5b4",
+                        "surface-container-low": "#1b1b1b",
+                        "secondary-fixed": "#e5e2e1"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "stack-sm": "8px",
+                        "margin-mobile": "20px",
+                        "stack-md": "16px",
+                        "gutter": "12px",
+                        "unit": "4px",
+                        "stack-lg": "24px"
+                    },
+                    "fontFamily": {
+                        "label-sm": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "label-bold": ["Inter"],
+                        "body-md": ["Inter"],
+                        "headline-lg": ["Montserrat"],
+                        "headline-xl": ["Montserrat"],
+                        "headline-md": ["Montserrat"]
+                    },
+                    "fontSize": {
+                        "label-sm": ["11px", { "lineHeight": "1.2", "fontWeight": "500" }],
+                        "body-lg": ["16px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "label-bold": ["12px", { "lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "700" }],
+                        "body-md": ["14px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "headline-lg": ["24px", { "lineHeight": "1.2", "fontWeight": "700" }],
+                        "headline-xl": ["32px", { "lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+                        "headline-md": ["20px", { "lineHeight": "1.2", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        /* Cyberpunk specific styles not covered by tokens */
+        .cyber-glow {
+            box-shadow: 0px 0px 15px rgba(158, 255, 0, 0.3);
+        }
+        .cyber-glow-text {
+            text-shadow: 0px 0px 8px rgba(158, 255, 0, 0.8);
+        }
+        .glass-panel {
+            background-color: rgba(26, 26, 26, 0.8);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen pb-[100px] selection:bg-primary-fixed selection:text-black">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 flex justify-between items-center px-margin-mobile h-16 bg-surface/80 backdrop-blur-xl border-b border-surface-variant md:hidden"><button aria-label="Language Selection" class="text-secondary p-2 -ml-2 flex items-center">
+    <span class="font-label-bold text-label-bold">
+        <span class="text-primary-fixed">VI</span> | EN
+    </span>
+</button>
+<h1 class="font-headline-md text-headline-md font-bold text-primary uppercase tracking-tighter">OEG CYBER HUB</h1>
+<button aria-label="notifications" class="text-primary-fixed p-2 -mr-2">
+    <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">notifications</span>
+</button></header>
+<!-- Main Content Canvas -->
+<main class="pt-[80px] pb-32 px-margin-mobile max-w-lg mx-auto md:max-w-4xl md:pt-[100px] flex flex-col gap-stack-lg">
+<!-- Wallet/Points Area (Bento Grid Style) -->
+<section class="grid grid-cols-1 md:grid-cols-2 gap-stack-md">
+<div class="bg-surface-container-high rounded-xl p-stack-md border border-surface-variant relative overflow-hidden group">
+<!-- Abstract background element -->
+<div class="absolute -right-10 -top-10 w-32 h-32 bg-primary-fixed/10 rounded-full blur-2xl group-hover:bg-primary-fixed/20 transition-all duration-500"></div>
+<div class="relative z-10 flex flex-col gap-stack-sm h-full justify-between">
+<div class="flex justify-between items-start">
+<span class="inline-block bg-surface-container px-3 py-1 rounded-full font-label-bold text-label-bold text-primary-fixed border border-primary-fixed/30">
+                            THÀNH VIÊN VÀNG
+                        </span>
+<span class="material-symbols-outlined text-primary-fixed text-3xl">star</span>
+</div>
+<div>
+<p class="font-label-sm text-label-sm text-secondary uppercase tracking-widest mb-1">Số dư hiện tại</p>
+<h2 class="font-headline-xl text-headline-xl text-primary">1,250 <span class="font-headline-md text-headline-md text-primary-fixed">OEG POINTS</span></h2>
+</div>
+</div>
+</div>
+<div class="flex items-center justify-center bg-surface-container-high rounded-xl p-stack-md border border-surface-variant md:h-full">
+<button class="w-full py-4 px-6 rounded-lg bg-surface border-2 border-primary-fixed text-primary-fixed font-label-bold text-label-bold uppercase tracking-wider hover:bg-primary-fixed/10 transition-colors cyber-glow flex items-center justify-center gap-2 group">
+<span class="material-symbols-outlined group-hover:scale-110 transition-transform">redeem</span>
+                    ĐỔI VOUCHER
+                </button>
+</div>
+</section>
+<!-- Daily Tasks List -->
+<section class="flex flex-col gap-stack-md">
+<div class="flex justify-between items-end mb-stack-sm border-b border-surface-variant pb-2">
+<h3 class="font-headline-md text-headline-md text-primary">Nhiệm vụ hàng ngày</h3>
+<p class="font-label-sm text-label-sm text-secondary flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">schedule</span>
+                    Làm mới sau: <span class="text-on-background font-mono">14h 22m</span>
+</p>
+</div>
+<!-- Task 1: In Progress -->
+<article class="bg-surface-container-high rounded-lg p-stack-md border border-surface-variant flex flex-col gap-stack-sm relative overflow-hidden">
+<div class="flex justify-between items-start z-10">
+<div class="flex gap-3 items-center">
+<div class="w-10 h-10 rounded-full bg-surface flex items-center justify-center border border-surface-variant">
+<span class="material-symbols-outlined text-primary-fixed">computer</span>
+</div>
+<div>
+<h4 class="font-body-lg text-body-lg text-primary font-bold">Chơi 3h tại Cyber</h4>
+<p class="font-label-sm text-label-sm text-secondary">Tiến độ: <span class="text-on-background">1.5h/3h</span></p>
+</div>
+</div>
+<div class="text-right">
+<span class="font-label-bold text-label-bold text-primary-fixed">+50 pts</span>
+</div>
+</div>
+<!-- Progress Bar -->
+<div class="w-full h-2 bg-surface rounded-full overflow-hidden mt-2 z-10 border border-surface-variant">
+<div class="h-full bg-primary-fixed w-[50%] relative shadow-[0_0_10px_rgba(158,255,0,0.5)]"></div>
+</div>
+</article>
+<!-- Task 2: Completed -->
+<article class="bg-surface-container-high rounded-lg p-stack-md border border-primary-fixed/30 flex flex-col gap-stack-sm relative overflow-hidden opacity-80">
+<!-- subtle background tint for completion -->
+<div class="absolute inset-0 bg-primary-fixed/5"></div>
+<div class="flex justify-between items-start z-10">
+<div class="flex gap-3 items-center">
+<div class="w-10 h-10 rounded-full bg-primary-fixed/20 flex items-center justify-center border border-primary-fixed">
+<span class="material-symbols-outlined text-primary-fixed" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<div>
+<h4 class="font-body-lg text-body-lg text-secondary line-through">Thắng 1 trận xếp hạng</h4>
+<p class="font-label-sm text-label-sm text-primary-fixed">Đã xong</p>
+</div>
+</div>
+<div class="text-right">
+<span class="font-label-bold text-label-bold text-secondary line-through">+100 pts</span>
+</div>
+</div>
+<!-- Progress Bar (Full) -->
+<div class="w-full h-2 bg-surface rounded-full overflow-hidden mt-2 z-10 border border-surface-variant">
+<div class="h-full bg-primary-fixed/50 w-full relative"></div>
+</div>
+</article>
+<!-- Task 3: Not Started -->
+<article class="bg-surface-container-high rounded-lg p-stack-md border border-surface-variant flex flex-col gap-stack-sm relative overflow-hidden">
+<div class="flex justify-between items-start z-10">
+<div class="flex gap-3 items-center">
+<div class="w-10 h-10 rounded-full bg-surface flex items-center justify-center border border-surface-variant">
+<span class="material-symbols-outlined text-primary-fixed">local_fire_department</span>
+</div>
+<div>
+<h4 class="font-body-lg text-body-lg text-primary font-bold">Đạt 1 combo chuỗi thắng</h4>
+<p class="font-label-sm text-label-sm text-secondary">Tiến độ: <span class="text-on-background">0/3 trận</span></p>
+</div>
+</div>
+<div class="text-right">
+<span class="font-label-bold text-label-bold text-primary-fixed">+150 pts</span>
+</div>
+</div>
+<!-- Progress Bar (Empty) -->
+<div class="w-full h-2 bg-surface rounded-full overflow-hidden mt-2 z-10 border border-surface-variant">
+<div class="h-full bg-primary-fixed w-[0%] relative"></div>
+</div>
+</article>
+</section>
+<!-- Big Claim Button -->
+<section class="mt-stack-lg mb-stack-lg">
+<button class="w-full py-4 rounded-xl bg-primary-fixed text-black font-headline-md text-headline-md uppercase tracking-wider hover:bg-primary-fixed-dim transition-colors cyber-glow flex items-center justify-center gap-2 active:scale-95 duration-150">
+                NHẬN THƯỞNG
+                <span class="material-symbols-outlined text-black" style="font-variation-settings: 'FILL' 1;">stars</span>
+</button>
+</section>
+</main>
+<!-- BottomNavBar -->
+
+
+
+</body></html>
