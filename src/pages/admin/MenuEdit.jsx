@@ -1,23 +1,18 @@
 import { useState, useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import {
-  doc, getDoc, addDoc, updateDoc, collection, serverTimestamp,
-} from 'firebase/firestore'
-import { ref, uploadBytes, getDownloadURL } from 'firebase/storage'
+import { doc, getDoc, addDoc, updateDoc, collection, serverTimestamp } from 'firebase/firestore'
 import toast from 'react-hot-toast'
-import { db, storage } from '../../lib/firebase'
+import { db } from '../../lib/firebase'
 import Button from '../../components/ui/Button'
 
 const EMPTY = { name: '', category: 'food', price: '', prepMin: '', inStock: true, isFeatured: false, imageUrl: '' }
 
 export default function MenuEdit() {
-  const { id }    = useParams()
-  const isNew     = id === 'new'
-  const navigate  = useNavigate()
-  const [form, setForm]       = useState(EMPTY)
-  const [file, setFile]       = useState(null)
-  const [preview, setPreview] = useState(null)
-  const [saving, setSaving]   = useState(false)
+  const { id }   = useParams()
+  const isNew    = id === 'new'
+  const navigate = useNavigate()
+  const [form, setForm]     = useState(EMPTY)
+  const [saving, setSaving] = useState(false)
 
   useEffect(() => {
     if (isNew) return
@@ -25,13 +20,6 @@ export default function MenuEdit() {
       if (snap.exists()) setForm({ ...EMPTY, ...snap.data() })
     })
   }, [id, isNew])
-
-  function handleFile(e) {
-    const f = e.target.files[0]
-    if (!f) return
-    setFile(f)
-    setPreview(URL.createObjectURL(f))
-  }
 
   function set(key, val) {
     setForm((p) => ({ ...p, [key]: val }))
@@ -45,12 +33,6 @@ export default function MenuEdit() {
     }
     setSaving(true)
     try {
-      let imageUrl = form.imageUrl
-      if (file) {
-        const storageRef = ref(storage, `menu-images/${crypto.randomUUID()}`)
-        await uploadBytes(storageRef, file)
-        imageUrl = await getDownloadURL(storageRef)
-      }
       const data = {
         name:       form.name.trim(),
         category:   form.category,
@@ -58,7 +40,7 @@ export default function MenuEdit() {
         prepMin:    Number(form.prepMin),
         inStock:    form.inStock,
         isFeatured: form.isFeatured,
-        imageUrl,
+        imageUrl:   form.imageUrl.trim(),
       }
       if (isNew) {
         await addDoc(collection(db, 'menuItems'), { ...data, createdAt: serverTimestamp() })
@@ -89,19 +71,22 @@ export default function MenuEdit() {
         </div>
 
         <form onSubmit={handleSave} className="flex flex-col gap-4">
-          {/* Image */}
-          <div className="flex flex-col gap-2">
-            <label className="text-secondary text-xs uppercase tracking-wider">Ảnh món</label>
-            <div className="relative w-full aspect-video bg-surface-container border border-surface-container-high rounded-xl overflow-hidden">
-              {(preview || form.imageUrl)
-                ? <img src={preview ?? form.imageUrl} alt="preview" className="w-full h-full object-cover" />
-                : <div className="w-full h-full flex items-center justify-center">
-                    <span className="material-symbols-outlined text-4xl text-secondary">add_photo_alternate</span>
-                  </div>
-              }
-              <input type="file" accept="image/*" onChange={handleFile} className="absolute inset-0 opacity-0 cursor-pointer" />
+          {/* Image preview */}
+          {form.imageUrl && (
+            <div className="w-full aspect-video bg-surface-container border border-surface-container-high rounded-xl overflow-hidden">
+              <img src={form.imageUrl} alt="preview" className="w-full h-full object-cover"
+                onError={(e) => { e.target.style.display = 'none' }} />
             </div>
-          </div>
+          )}
+
+          <Field label="URL ảnh (từ Imgur, Google Drive, v.v.)">
+            <input
+              value={form.imageUrl}
+              onChange={(e) => set('imageUrl', e.target.value)}
+              placeholder="https://i.imgur.com/..."
+              className="input-field"
+            />
+          </Field>
 
           <Field label="Tên món *">
             <input value={form.name} onChange={(e) => set('name', e.target.value)} required
@@ -146,7 +131,7 @@ export default function MenuEdit() {
         </form>
       </div>
 
-      <style>{`.input-field { width:100%; background:#1F1F1F; border:1px solid #2A2A2A; border-radius:12px; padding:12px 16px; color:#fff; font-size:14px; outline:none; } .input-field:focus { border-color:#9EFF00; }`}</style>
+      <style>{`.input-field{width:100%;background:#1F1F1F;border:1px solid #2A2A2A;border-radius:12px;padding:12px 16px;color:#fff;font-size:14px;outline:none}.input-field:focus{border-color:#9EFF00}`}</style>
     </div>
   )
 }

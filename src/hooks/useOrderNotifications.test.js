@@ -13,7 +13,7 @@ global.Notification = { permission: 'denied' }
 
 const order = (id, status) => ({ id, machineNo: 1, status, items: [] })
 
-afterEach(() => {
+beforeEach(() => {
   vi.clearAllMocks()
 })
 
