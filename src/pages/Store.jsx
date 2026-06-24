@@ -7,6 +7,7 @@ import CategoryFilter from '../components/menu/CategoryFilter'
 import CartDrawer from '../components/menu/CartDrawer'
 import Spinner from '../components/ui/Spinner'
 import LanguageToggle from '../components/layout/LanguageToggle'
+import SoundToggle from '../components/layout/SoundToggle'
 
 export default function Store() {
   const { t } = useTranslation()
@@ -23,7 +24,10 @@ export default function Store() {
           </h1>
           <p className="text-secondary text-xs">{t('store.subtitle')}</p>
         </div>
-        <LanguageToggle />
+        <div className="flex items-center gap-2">
+          <SoundToggle />
+          <LanguageToggle />
+        </div>
       </div>
 
       <CategoryFilter active={category} onChange={setCategory} />

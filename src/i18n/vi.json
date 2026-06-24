@@ -20,6 +20,10 @@
     "en": "EN",
     "switch": "Đổi ngôn ngữ"
   },
+  "sound": {
+    "mute": "Tắt chuông",
+    "unmute": "Bật chuông"
+  },
   "nav": {
     "home": "Trang chủ",
     "menu": "Menu",

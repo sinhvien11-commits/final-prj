@@ -1,4 +1,5 @@
 import LanguageToggle from './LanguageToggle'
+import SoundToggle from './SoundToggle'
 
 export default function TopAppBar({ title, actions }) {
   return (
@@ -8,6 +9,7 @@ export default function TopAppBar({ title, actions }) {
       </span>
       <div className="flex items-center gap-2">
         {actions}
+        <SoundToggle />
         <LanguageToggle />
       </div>
     </header>

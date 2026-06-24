@@ -1,7 +1,9 @@
 import { useEffect, useRef } from 'react'
 import toast from 'react-hot-toast'
+import { useSound } from '../context/SoundContext'
 
 export function useNewOrderAlert(receivedOrders) {
+  const { play } = useSound()
   const prevCountRef = useRef(null)
 
   useEffect(() => {
@@ -10,10 +12,11 @@ export function useNewOrderAlert(receivedOrders) {
       prevCountRef.current = receivedOrders.length
       return
     }
+    // Có ĐƠN MỚI vào bảng bếp (số đơn 'received' tăng) → beep.
     if (receivedOrders.length > prevCountRef.current) {
       toast('Đơn hàng mới!', { icon: '🔔', duration: 5000 })
-      new Audio('/sounds/new-order.mp3').play().catch(() => {})
+      play()
     }
     prevCountRef.current = receivedOrders.length
-  }, [receivedOrders.length])
+  }, [receivedOrders.length, play])
 }

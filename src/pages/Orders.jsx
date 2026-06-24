@@ -5,6 +5,7 @@ import { useOrderNotifications } from '../hooks/useOrderNotifications'
 import OrderTracker from '../components/order/OrderTracker'
 import Spinner from '../components/ui/Spinner'
 import LanguageToggle from '../components/layout/LanguageToggle'
+import SoundToggle from '../components/layout/SoundToggle'
 
 export default function Orders() {
   const { t } = useTranslation()
@@ -29,7 +30,10 @@ export default function Orders() {
           </h1>
           <p className="text-secondary text-xs mt-1">{t('orders.machine', { no: machineNo })}</p>
         </div>
-        <LanguageToggle />
+        <div className="flex items-center gap-2">
+          <SoundToggle />
+          <LanguageToggle />
+        </div>
       </div>
 
       {error && orders.length === 0 && <p className="text-error text-center py-8">{t(error)}</p>}

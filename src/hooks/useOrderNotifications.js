@@ -2,16 +2,19 @@ import { useEffect, useRef } from 'react'
 import { useTranslation } from 'react-i18next'
 import toast from 'react-hot-toast'
 import { itemName } from '../lib/itemName'
+import { useSound } from '../context/SoundContext'
 
 const TRANSITIONS = {
-  preparing:  { key: 'notify.preparing',  icon: '🍳', sound: 'notify.mp3' },
-  delivering: { key: 'notify.delivering', icon: '🛵', sound: 'notify.mp3' },
-  done:       { key: 'notify.done',       icon: '✅', sound: 'done.mp3'   },
-  cancelled:  { key: 'notify.cancelled',  icon: '❌', sound: null         },
+  // beep: chỉ kêu khi đơn KHÁCH chuyển sang 'đang làm' / 'đang giao'.
+  preparing:  { key: 'notify.preparing',  icon: '🍳', beep: true  },
+  delivering: { key: 'notify.delivering', icon: '🛵', beep: true  },
+  done:       { key: 'notify.done',       icon: '✅', beep: false },
+  cancelled:  { key: 'notify.cancelled',  icon: '❌', beep: false },
 }
 
 export function useOrderNotifications(orders) {
   const { t, i18n } = useTranslation()
+  const { play } = useSound()
   const prevStatusRef = useRef({})
 
   useEffect(() => {
@@ -27,9 +30,7 @@ export function useOrderNotifications(orders) {
         const message = t(tr.key)
         toast(message, { icon: tr.icon, duration: 6000 })
 
-        if (tr.sound) {
-          new Audio(`/sounds/${tr.sound}`).play().catch(() => {})
-        }
+        if (tr.beep) play()
 
         if (Notification.permission === 'granted') {
           new Notification(`${t('orders.machine', { no: order.machineNo })} — ${message}`, {
@@ -44,5 +45,5 @@ export function useOrderNotifications(orders) {
     })
 
     prevStatusRef.current = prev
-  }, [orders, t])
+  }, [orders, t, play])
 }

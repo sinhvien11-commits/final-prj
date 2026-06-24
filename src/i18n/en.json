@@ -20,6 +20,10 @@
     "en": "EN",
     "switch": "Change language"
   },
+  "sound": {
+    "mute": "Turn off sound",
+    "unmute": "Turn on sound"
+  },
   "nav": {
     "home": "Home",
     "menu": "Menu",

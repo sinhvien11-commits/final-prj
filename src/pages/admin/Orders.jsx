@@ -5,6 +5,7 @@ import { serverTimestamp } from 'firebase/firestore'
 import toast from 'react-hot-toast'
 import { db } from '../../lib/firebase'
 import { useNewOrderAlert } from '../../hooks/useNewOrderAlert'
+import SoundToggle from '../../components/layout/SoundToggle'
 
 const COLUMNS = [
   { status: 'received',   label: 'RECEIVED',   color: 'text-secondary' },
@@ -99,13 +100,16 @@ export default function AdminOrders() {
           </h1>
           <p className="text-secondary text-sm mt-1">{allOrders.length} đơn đang xử lý</p>
         </div>
-        <button
-          onClick={() => navigate('/admin/requests')}
-          className="flex items-center gap-1 bg-surface-container text-primary text-sm font-bold px-4 py-2 rounded-lg hover:bg-surface-variant transition-colors"
-        >
-          <span className="material-symbols-outlined text-[18px]">room_service</span>
-          Yêu cầu phục vụ
-        </button>
+        <div className="flex items-center gap-2">
+          <SoundToggle />
+          <button
+            onClick={() => navigate('/admin/requests')}
+            className="flex items-center gap-1 bg-surface-container text-primary text-sm font-bold px-4 py-2 rounded-lg hover:bg-surface-variant transition-colors"
+          >
+            <span className="material-symbols-outlined text-[18px]">room_service</span>
+            Yêu cầu phục vụ
+          </button>
+        </div>
       </div>
 
       <div className="grid grid-cols-3 gap-4">

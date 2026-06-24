@@ -5,6 +5,7 @@ import ErrorBoundary from './components/layout/ErrorBoundary'
 import RequireAuth from './components/layout/RequireAuth'
 import BottomNav from './components/layout/BottomNav'
 import { CartProvider } from './context/CartContext'
+import { SoundProvider } from './context/SoundContext'
 import MachineModal from './components/MachineModal'
 
 import Home    from './pages/Home'
@@ -31,6 +32,7 @@ export default function App() {
 
   return (
     <BrowserRouter>
+      <SoundProvider>
       <CartProvider>
         <Toaster
           position="top-center"
@@ -82,6 +84,7 @@ export default function App() {
           } />
         </Routes>
       </CartProvider>
+      </SoundProvider>
     </BrowserRouter>
   )
 }
