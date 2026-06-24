@@ -10,6 +10,7 @@ const ITEMS = [
   { to: '/admin/orders',   end: false, icon: 'receipt_long', label: 'Bảng đơn',  roles: ['admin', 'kitchen'] },
   { to: '/admin/menu',     end: false, icon: 'restaurant_menu', label: 'Menu',   roles: ['admin'] },
   { to: '/admin/requests', end: false, icon: 'room_service', label: 'Yêu cầu',   roles: ['admin', 'kitchen'] },
+  { to: '/admin/reviews',  end: false, icon: 'reviews',      label: 'Đánh giá',  roles: ['admin', 'kitchen'] },
   { to: '/admin/reports',  end: false, icon: 'bar_chart',    label: 'Báo cáo',   roles: ['admin'] },
 ]
 

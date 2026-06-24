@@ -152,6 +152,18 @@
     "thanks": "Cảm ơn bạn đã đánh giá! 🎉",
     "error": "Không thể gửi đánh giá. Vui lòng thử lại."
   },
+  "reviewForm": {
+    "promptOrder": "Đánh giá đơn hàng của bạn",
+    "promptAssist": "Đánh giá hỗ trợ của nhân viên",
+    "placeholder": "Góp ý thêm (không bắt buộc)...",
+    "submit": "Gửi đánh giá",
+    "submitting": "Đang gửi...",
+    "success": "Đã gửi đánh giá!",
+    "thanks": "Cảm ơn đánh giá của bạn",
+    "chooseRating": "Vui lòng chọn số sao.",
+    "error": "Không thể gửi đánh giá. Vui lòng thử lại.",
+    "starLabel": "{{n}} sao"
+  },
   "machine": {
     "appName": "OEG Cyber Hub",
     "prompt": "Nhập số máy của bạn để bắt đầu",

@@ -152,6 +152,18 @@
     "thanks": "Thanks for your review! 🎉",
     "error": "Couldn't submit review. Please try again."
   },
+  "reviewForm": {
+    "promptOrder": "Rate your order",
+    "promptAssist": "Rate the staff support",
+    "placeholder": "Tell us more (optional)...",
+    "submit": "Submit review",
+    "submitting": "Submitting...",
+    "success": "Review submitted!",
+    "thanks": "Thank you for your review",
+    "chooseRating": "Please pick a star rating.",
+    "error": "Couldn't submit review. Please try again.",
+    "starLabel": "{{n}} stars"
+  },
   "machine": {
     "appName": "OEG Cyber Hub",
     "prompt": "Enter your machine number to start",

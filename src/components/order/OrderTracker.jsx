@@ -1,5 +1,6 @@
 import { useTranslation } from 'react-i18next'
 import OrderStepper from './OrderStepper'
+import ReviewForm from '../ReviewForm'
 import { useElapsed } from '../../hooks/useElapsed'
 import { itemName } from '../../lib/itemName'
 
@@ -70,6 +71,11 @@ export default function OrderTracker({ order }) {
           <span className="text-primary">{order.total.toLocaleString('vi-VN')} đ</span>
         </div>
       </div>
+
+      {/* Đơn đã hoàn thành → mời khách đánh giá (ẩn nếu đã đánh giá, theo localStorage). */}
+      {order.status === 'done' && (
+        <ReviewForm source="order" orderId={order.id} machineNo={order.machineNo} />
+      )}
     </div>
   )
 }

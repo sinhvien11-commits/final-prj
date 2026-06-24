@@ -8,6 +8,7 @@ import { useElapsed } from '../hooks/useElapsed'
 import Badge from '../components/ui/Badge'
 import Button from '../components/ui/Button'
 import TopAppBar from '../components/layout/TopAppBar'
+import ReviewForm from '../components/ReviewForm'
 
 const ASSIST_COOLDOWN_MS = 2 * 60 * 1000 // chặn spam gọi nhân viên trong 2 phút
 
@@ -61,9 +62,11 @@ export default function Esports() {
   // In-memory throttle: khách (chưa đăng nhập) không có quyền read serviceRequests
   // nên không thể query đơn pending — chặn spam ngay trong phiên bằng cooldown.
   const [assistCooldownUntil, setAssistCooldownUntil] = useState(0)
+  // requestId của yêu cầu assist vừa gửi → dùng để hiện form đánh giá (xem ghi chú dưới).
+  const [assistReqId, setAssistReqId] = useState(null)
 
   async function createRequest(extra) {
-    await addDoc(collection(db, 'serviceRequests'), {
+    const ref = await addDoc(collection(db, 'serviceRequests'), {
       machineNo: Number(machineNo),
       note:      '',
       status:    'pending',
@@ -71,6 +74,7 @@ export default function Esports() {
       updatedAt: serverTimestamp(),
       ...extra,
     })
+    return ref.id
   }
 
   async function confirmAssist() {
@@ -81,8 +85,9 @@ export default function Esports() {
     }
     setSubmitting(true)
     try {
-      await createRequest({ type: 'assist' })
+      const reqId = await createRequest({ type: 'assist' })
       setAssistCooldownUntil(Date.now() + ASSIST_COOLDOWN_MS)
+      setAssistReqId(reqId)
       toast.success(t('esports.staffCalled'))
       setModal(null)
     } catch (e) {
@@ -146,6 +151,13 @@ export default function Esports() {
             <Button variant="ghost" onClick={() => setModal('assist')}>{t('esports.callStaff')}</Button>
           </div>
         </div>
+
+        {/* Khách không có quyền đọc serviceRequests nên không theo dõi được trạng thái
+            'handled'. Để không phá rule bảo mật, hiện form đánh giá ngay sau khi gửi
+            yêu cầu gọi nhân viên thành công (xem giải thích trong báo cáo). */}
+        {assistReqId && (
+          <ReviewForm source="assist" requestId={assistReqId} machineNo={machineNo} />
+        )}
 
         <div className="bg-surface border border-surface-container-high rounded-xl p-4">
           <h3 className="font-display font-bold text-sm uppercase tracking-wider text-primary mb-3">

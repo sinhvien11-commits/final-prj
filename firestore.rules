@@ -64,6 +64,19 @@ service cloud.firestore {
         && request.resource.data.dayKey is string;
     }
 
+    // Đánh giá từ màn khách. Khách (chưa đăng nhập) chỉ được TẠO khi doc chưa tồn
+    // tại (id tất định → chống đánh giá trùng). READ/list chỉ dành cho kitchen/admin.
+    // Không cho update/delete từ client (không khai báo → mặc định deny).
+    match /reviews/{reviewId} {
+      allow create: if !exists(/databases/$(database)/documents/reviews/$(reviewId))
+        && request.resource.data.machineNo is number
+        && request.resource.data.rating is int
+        && request.resource.data.rating >= 1
+        && request.resource.data.rating <= 5
+        && request.resource.data.source in ['order', 'assist'];
+      allow read: if isKitchenOrAdmin();
+    }
+
     match /profiles/{uid} {
       // Fix 1: non-admin cannot change the role field (prevent self-promote)
       allow update: if request.auth != null

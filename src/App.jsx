@@ -23,6 +23,7 @@ import AdminMenu     from './pages/admin/Menu'
 import AdminMenuEdit from './pages/admin/MenuEdit'
 import AdminOverview from './pages/admin/Overview'
 import AdminReports  from './pages/admin/Reports'
+import AdminReviews  from './pages/admin/Reviews'
 
 export default function App() {
   useEffect(() => {
@@ -78,6 +79,7 @@ export default function App() {
                     <Route index             element={<RequireAuth allowedRoles={['admin']}><AdminOverview /></RequireAuth>} />
                     <Route path="orders"     element={<AdminOrders />} />
                     <Route path="requests"   element={<RequireAuth allowedRoles={['admin','kitchen']}><AdminRequests /></RequireAuth>} />
+                    <Route path="reviews"    element={<RequireAuth allowedRoles={['admin','kitchen']}><AdminReviews /></RequireAuth>} />
                     <Route path="menu"       element={<RequireAuth allowedRoles={['admin']}><AdminMenu /></RequireAuth>} />
                     <Route path="menu/:id"   element={<RequireAuth allowedRoles={['admin']}><AdminMenuEdit /></RequireAuth>} />
                     <Route path="reports"    element={<RequireAuth allowedRoles={['admin']}><AdminReports /></RequireAuth>} />
