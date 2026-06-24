@@ -12,13 +12,16 @@
     "test:ui": "vitest --ui",
     "test:rules": "vitest run src/test/firestore.rules.test.js",
     "seed": "node scripts/seed.js",
-  "seed:reset": "node scripts/seed.js --reset"
+    "seed:reset": "node scripts/seed.js --reset"
   },
   "dependencies": {
     "firebase": "^12.15.0",
+    "i18next": "^26.3.2",
+    "i18next-browser-languagedetector": "^8.2.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-hot-toast": "^2.6.0",
+    "react-i18next": "^17.0.8",
     "react-router-dom": "^7.18.0"
   },
   "devDependencies": {

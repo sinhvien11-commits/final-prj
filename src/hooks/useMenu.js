@@ -15,7 +15,7 @@ export function useMenu(category) {
         if (category && category !== 'all') docs = docs.filter((d) => d.category === category)
         setItems(docs)
       })
-      .catch(() => setError('Không thể tải menu.'))
+      .catch(() => setError('errors.loadMenu'))
       .finally(() => setLoading(false))
   }, [category])
 

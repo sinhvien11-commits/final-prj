@@ -1,0 +1,158 @@
+{
+  "common": {
+    "appName": "OEG Cyber Hub",
+    "cancel": "Huỷ",
+    "confirm": "Xác nhận",
+    "close": "Đóng"
+  },
+  "errors": {
+    "loadMenu": "Không thể tải menu.",
+    "loadQueue": "Không thể tải trạng thái hàng chờ.",
+    "loadOrders": "Không thể tải đơn hàng."
+  },
+  "units": {
+    "min": "phút",
+    "minShort": "p",
+    "hourShort": "g"
+  },
+  "lang": {
+    "vi": "VI",
+    "en": "EN",
+    "switch": "Đổi ngôn ngữ"
+  },
+  "nav": {
+    "home": "Trang chủ",
+    "menu": "Menu",
+    "orders": "Đơn hàng",
+    "esports": "Esports",
+    "quests": "Quests"
+  },
+  "home": {
+    "statusOpen": "ĐANG MỞ CỬA",
+    "tagline": "Gaming Station · F&B · Esports",
+    "occupancy": "Tỷ lệ lấp đầy",
+    "statPing": "PING",
+    "statPlaying": "ĐANG CHƠI",
+    "statWaiting": "CHỜ ĐỢI",
+    "queueTitle": "Hàng chờ F&B",
+    "ordersBadge": "{{count}} đơn",
+    "processingOrders": "Đơn đang xử lý",
+    "avgWait": "Thời gian chờ TB"
+  },
+  "store": {
+    "title": "Menu",
+    "subtitle": "Chọn món — giao tận bàn",
+    "empty": "Không có món nào."
+  },
+  "category": {
+    "all": "Tất cả",
+    "food": "Đồ ăn",
+    "drinks": "Nước",
+    "combo": "Combo"
+  },
+  "menuCard": {
+    "outOfStock": "Hết hàng",
+    "prep": "~{{min}} phút",
+    "add": "Thêm"
+  },
+  "cart": {
+    "title": "Giỏ hàng",
+    "items": "{{count}} món",
+    "notePlaceholder": "Ghi chú (không bắt buộc)",
+    "total": "Tổng cộng",
+    "placeOrder": "ĐẶT NGAY",
+    "placing": "ĐANG ĐẶT...",
+    "orderSuccess": "Đặt hàng thành công!",
+    "orderError": "Không thể đặt hàng. Vui lòng thử lại."
+  },
+  "orders": {
+    "title": "Đơn hàng",
+    "machine": "Máy {{no}}",
+    "enterMachine": "Vui lòng nhập số máy để xem đơn hàng.",
+    "empty": "Chưa có đơn hàng nào."
+  },
+  "order": {
+    "statusReceived": "Đã nhận",
+    "statusPreparing": "Đang làm",
+    "statusDelivering": "Đang giao",
+    "statusDone": "Hoàn thành",
+    "statusCancelled": "Đã huỷ",
+    "waited": "Đã đợi {{time}}",
+    "eta": "dự kiến còn ~{{min}} phút",
+    "total": "Tổng"
+  },
+  "notify": {
+    "preparing": "Đơn hàng đang được chuẩn bị!",
+    "delivering": "Đơn hàng đang trên đường giao!",
+    "done": "Đơn hàng đã đến nơi! Enjoy 🎮",
+    "cancelled": "Đơn hàng đã bị hủy."
+  },
+  "esports": {
+    "title": "Esports",
+    "enterMachine": "Vui lòng nhập số máy để bắt đầu phiên chơi.",
+    "yourSeat": "Vị trí của bạn",
+    "seat": "Ghế {{seat}}",
+    "playing": "ĐANG CHƠI",
+    "playedTime": "Thời gian đã chơi",
+    "extend": "GIA HẠN THÊM GIỜ",
+    "callStaff": "GỌI NHÂN VIÊN",
+    "sessionStats": "Thống kê phiên",
+    "statFps": "FPS TB",
+    "statPing": "Ping",
+    "statKda": "KDA",
+    "statRank": "Rank",
+    "assistTitle": "Gọi nhân viên",
+    "assistConfirm": "Xác nhận gọi nhân viên đến ghế {{seat}}?",
+    "extendTitle": "Gia hạn thêm giờ",
+    "extendDesc": "Chọn thời lượng gia hạn cho ghế {{seat}}.",
+    "extendMinutes": "{{min}} phút",
+    "staffBusy": "Nhân viên đang xử lý yêu cầu của bạn, vui lòng đợi.",
+    "staffCalled": "Đã gọi nhân viên, vui lòng đợi.",
+    "requestFailed": "Không gửi được yêu cầu.",
+    "extendSent": "Đã gửi yêu cầu gia hạn {{min}} phút."
+  },
+  "quests": {
+    "title": "Quests",
+    "tier": "Hạng thành viên",
+    "gold": "THÀNH VIÊN VÀNG",
+    "points": "Điểm tích lũy",
+    "redeemVoucher": "ĐỔI VOUCHER",
+    "dailyTasks": "Nhiệm vụ hôm nay",
+    "timeLeft": "Còn {{time}}",
+    "enterMachine": "Vui lòng nhập số máy để đổi voucher.",
+    "taskFirstOrder": "Đặt F&B lần đầu",
+    "taskPlay3h": "Chơi 3 giờ liên tục",
+    "taskReview": "Để lại đánh giá",
+    "taskInvite": "Mời bạn bè"
+  },
+  "voucher": {
+    "title": "Đổi voucher",
+    "currentPoints": "Điểm hiện có",
+    "yourCode": "Mã voucher của bạn",
+    "redeem": "Đổi",
+    "empty": "Chưa có voucher nào.",
+    "redeemed": "Voucher đã đổi",
+    "success": "Đổi thành công!",
+    "insufficient": "Bạn không đủ điểm để đổi voucher này.",
+    "failed": "Đổi voucher thất bại."
+  },
+  "review": {
+    "title": "Đánh giá trải nghiệm",
+    "subtitle": "Chia sẻ cảm nhận của bạn về OEG Cyber Hub",
+    "reward": "🎁 GIẢM 10% đơn hàng tiếp theo",
+    "placeholder": "Nói thêm về trải nghiệm của bạn...",
+    "submit": "GỬI ĐÁNH GIÁ",
+    "submitting": "ĐANG GỬI...",
+    "skip": "Bỏ qua",
+    "chooseRating": "Chọn mức đánh giá.",
+    "thanks": "Cảm ơn bạn đã đánh giá! 🎉",
+    "error": "Không thể gửi đánh giá. Vui lòng thử lại."
+  },
+  "machine": {
+    "appName": "OEG Cyber Hub",
+    "prompt": "Nhập số máy của bạn để bắt đầu",
+    "placeholder": "Số máy (VD: 42)",
+    "confirm": "XÁC NHẬN",
+    "invalid": "Vui lòng nhập số máy hợp lệ."
+  }
+}

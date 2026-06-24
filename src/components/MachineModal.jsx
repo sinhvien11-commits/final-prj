@@ -1,8 +1,11 @@
 import { useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { useCart } from '../context/CartContext'
 import Button from './ui/Button'
+import LanguageToggle from './layout/LanguageToggle'
 
 export default function MachineModal() {
+  const { t } = useTranslation()
   const { machineNo, saveMachineNo } = useCart()
   const [input, setInput] = useState('')
   const [error, setError] = useState('')
@@ -13,7 +16,7 @@ export default function MachineModal() {
     e.preventDefault()
     const num = Number(input)
     if (!input || isNaN(num) || num < 1) {
-      setError('Vui lòng nhập số máy hợp lệ.')
+      setError(t('machine.invalid'))
       return
     }
     saveMachineNo(num)
@@ -22,12 +25,15 @@ export default function MachineModal() {
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm px-5">
       <div className="w-full max-w-sm bg-surface border border-surface-container-high rounded-2xl p-6 flex flex-col gap-5">
+        <div className="flex justify-end">
+          <LanguageToggle />
+        </div>
         <div className="text-center">
           <span className="material-symbols-outlined text-4xl text-primary-fixed">videogame_asset</span>
           <h2 className="font-display font-bold text-xl uppercase tracking-tight text-primary mt-2">
-            OEG Cyber Hub
+            {t('machine.appName')}
           </h2>
-          <p className="text-secondary text-sm mt-1">Nhập số máy của bạn để bắt đầu</p>
+          <p className="text-secondary text-sm mt-1">{t('machine.prompt')}</p>
         </div>
 
         <form onSubmit={handleSubmit} className="flex flex-col gap-3">
@@ -36,12 +42,12 @@ export default function MachineModal() {
             inputMode="numeric"
             value={input}
             onChange={(e) => { setInput(e.target.value); setError('') }}
-            placeholder="Số máy (VD: 42)"
+            placeholder={t('machine.placeholder')}
             className="w-full bg-surface-container border border-surface-container-high rounded-xl px-4 py-3 text-primary text-center text-xl font-bold focus:outline-none focus:border-primary-fixed"
             min="1"
           />
           {error && <p className="text-error text-xs text-center">{error}</p>}
-          <Button type="submit">XÁC NHẬN</Button>
+          <Button type="submit">{t('machine.confirm')}</Button>
         </form>
       </div>
     </div>

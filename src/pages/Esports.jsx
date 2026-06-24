@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { useTranslation } from 'react-i18next'
 import { doc, getDoc, setDoc, addDoc, collection, serverTimestamp, Timestamp } from 'firebase/firestore'
 import toast from 'react-hot-toast'
 import { useCart } from '../context/CartContext'
@@ -23,7 +24,9 @@ function vnDayKey(date = new Date()) {
 }
 
 export default function Esports() {
+  const { t } = useTranslation()
   const { machineNo } = useCart()
+  const seat = machineNo ? `A${machineNo}` : '—'
   const [startedAt, setStartedAt] = useState(null) // epoch ms, từ Firestore
 
   // Mở/khôi phục phiên chơi theo máy, lưu Firestore để sống qua F5 / đổi máy.
@@ -72,7 +75,7 @@ export default function Esports() {
 
   async function confirmAssist() {
     if (Date.now() < assistCooldownUntil) {
-      toast('Nhân viên đang xử lý yêu cầu của bạn, vui lòng đợi.')
+      toast(t('esports.staffBusy'))
       setModal(null)
       return
     }
@@ -80,10 +83,10 @@ export default function Esports() {
     try {
       await createRequest({ type: 'assist' })
       setAssistCooldownUntil(Date.now() + ASSIST_COOLDOWN_MS)
-      toast.success('Đã gọi nhân viên, vui lòng đợi.')
+      toast.success(t('esports.staffCalled'))
       setModal(null)
     } catch (e) {
-      toast.error('Không gửi được yêu cầu.')
+      toast.error(t('esports.requestFailed'))
       console.error(e)
     } finally {
       setSubmitting(false)
@@ -94,10 +97,10 @@ export default function Esports() {
     setSubmitting(true)
     try {
       await createRequest({ type: 'extend', minutes })
-      toast.success(`Đã gửi yêu cầu gia hạn ${minutes} phút.`)
+      toast.success(t('esports.extendSent', { min: minutes }))
       setModal(null)
     } catch (e) {
-      toast.error('Không gửi được yêu cầu.')
+      toast.error(t('esports.requestFailed'))
       console.error(e)
     } finally {
       setSubmitting(false)
@@ -107,9 +110,9 @@ export default function Esports() {
   if (!machineNo) {
     return (
       <>
-        <TopAppBar title="Esports" />
+        <TopAppBar title={t('esports.title')} />
         <div className="pt-16 pb-20 px-4 flex items-center justify-center min-h-screen">
-          <p className="text-secondary text-center">Vui lòng nhập số máy để bắt đầu phiên chơi.</p>
+          <p className="text-secondary text-center">{t('esports.enterMachine')}</p>
         </div>
       </>
     )
@@ -117,43 +120,43 @@ export default function Esports() {
 
   return (
     <>
-      <TopAppBar title="Esports" />
+      <TopAppBar title={t('esports.title')} />
       <div className="pt-16 pb-20 px-4 flex flex-col gap-4 mt-3">
 
         <div className="bg-surface border border-surface-container-high rounded-xl p-5 flex flex-col gap-4">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-secondary text-xs uppercase tracking-wider">Vị trí của bạn</p>
+              <p className="text-secondary text-xs uppercase tracking-wider">{t('esports.yourSeat')}</p>
               <p className="font-display font-black text-2xl text-primary mt-0.5">
-                Ghế {machineNo ? `A${machineNo}` : '—'}
+                {t('esports.seat', { seat })}
               </p>
             </div>
-            <Badge variant="live">ĐANG CHƠI</Badge>
+            <Badge variant="live">{t('esports.playing')}</Badge>
           </div>
 
           <div className="bg-surface-container rounded-xl p-4 text-center">
-            <p className="text-secondary text-xs uppercase tracking-wider mb-1">Thời gian đã chơi</p>
+            <p className="text-secondary text-xs uppercase tracking-wider mb-1">{t('esports.playedTime')}</p>
             <p className="font-display font-black text-4xl text-primary-fixed neon-text-glow tracking-wider">
               {fmt(elapsed)}
             </p>
           </div>
 
           <div className="flex flex-col gap-2">
-            <Button variant="primary" onClick={() => setModal('extend')}>GIA HẠN THÊM GIỜ</Button>
-            <Button variant="ghost" onClick={() => setModal('assist')}>GỌI NHÂN VIÊN</Button>
+            <Button variant="primary" onClick={() => setModal('extend')}>{t('esports.extend')}</Button>
+            <Button variant="ghost" onClick={() => setModal('assist')}>{t('esports.callStaff')}</Button>
           </div>
         </div>
 
         <div className="bg-surface border border-surface-container-high rounded-xl p-4">
           <h3 className="font-display font-bold text-sm uppercase tracking-wider text-primary mb-3">
-            Thống kê phiên
+            {t('esports.sessionStats')}
           </h3>
           <div className="grid grid-cols-2 gap-2">
             {[
-              { label: 'FPS TB', value: '144' },
-              { label: 'Ping', value: '4ms' },
-              { label: 'KDA', value: '8.2' },
-              { label: 'Rank', value: 'Diamond' },
+              { label: t('esports.statFps'), value: '144' },
+              { label: t('esports.statPing'), value: '4ms' },
+              { label: t('esports.statKda'), value: '8.2' },
+              { label: t('esports.statRank'), value: 'Diamond' },
             ].map(({ label, value }) => (
               <div key={label} className="bg-surface-container rounded-lg p-3 text-center">
                 <p className="text-secondary text-xs">{label}</p>
@@ -167,19 +170,19 @@ export default function Esports() {
 
       {modal === 'assist' && (
         <Modal onClose={() => !submitting && setModal(null)}>
-          <h3 className="font-display font-bold text-lg text-primary uppercase tracking-tight">Gọi nhân viên</h3>
-          <p className="text-secondary text-sm">Xác nhận gọi nhân viên đến ghế A{machineNo}?</p>
+          <h3 className="font-display font-bold text-lg text-primary uppercase tracking-tight">{t('esports.assistTitle')}</h3>
+          <p className="text-secondary text-sm">{t('esports.assistConfirm', { seat })}</p>
           <div className="flex gap-2">
-            <Button variant="ghost" onClick={() => setModal(null)} disabled={submitting}>Huỷ</Button>
-            <Button variant="primary" onClick={confirmAssist} disabled={submitting}>Xác nhận</Button>
+            <Button variant="ghost" onClick={() => setModal(null)} disabled={submitting}>{t('common.cancel')}</Button>
+            <Button variant="primary" onClick={confirmAssist} disabled={submitting}>{t('common.confirm')}</Button>
           </div>
         </Modal>
       )}
 
       {modal === 'extend' && (
         <Modal onClose={() => !submitting && setModal(null)}>
-          <h3 className="font-display font-bold text-lg text-primary uppercase tracking-tight">Gia hạn thêm giờ</h3>
-          <p className="text-secondary text-sm">Chọn thời lượng gia hạn cho ghế A{machineNo}.</p>
+          <h3 className="font-display font-bold text-lg text-primary uppercase tracking-tight">{t('esports.extendTitle')}</h3>
+          <p className="text-secondary text-sm">{t('esports.extendDesc', { seat })}</p>
           <div className="grid grid-cols-3 gap-2">
             {[15, 30, 60].map((m) => (
               <button
@@ -188,11 +191,11 @@ export default function Esports() {
                 disabled={submitting}
                 className="bg-surface-container hover:bg-primary-fixed hover:text-black text-primary font-bold py-4 rounded-xl transition-colors disabled:opacity-50"
               >
-                {m} phút
+                {t('esports.extendMinutes', { min: m })}
               </button>
             ))}
           </div>
-          <Button variant="ghost" onClick={() => setModal(null)} disabled={submitting}>Đóng</Button>
+          <Button variant="ghost" onClick={() => setModal(null)} disabled={submitting}>{t('common.close')}</Button>
         </Modal>
       )}
     </>

@@ -1,0 +1,158 @@
+{
+  "common": {
+    "appName": "OEG Cyber Hub",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "close": "Close"
+  },
+  "errors": {
+    "loadMenu": "Couldn't load the menu.",
+    "loadQueue": "Couldn't load queue status.",
+    "loadOrders": "Couldn't load orders."
+  },
+  "units": {
+    "min": "min",
+    "minShort": "m",
+    "hourShort": "h"
+  },
+  "lang": {
+    "vi": "VI",
+    "en": "EN",
+    "switch": "Change language"
+  },
+  "nav": {
+    "home": "Home",
+    "menu": "Menu",
+    "orders": "Orders",
+    "esports": "Esports",
+    "quests": "Quests"
+  },
+  "home": {
+    "statusOpen": "OPEN NOW",
+    "tagline": "Gaming Station · F&B · Esports",
+    "occupancy": "Occupancy",
+    "statPing": "PING",
+    "statPlaying": "PLAYING",
+    "statWaiting": "WAIT",
+    "queueTitle": "F&B Queue",
+    "ordersBadge": "{{count}} orders",
+    "processingOrders": "Active orders",
+    "avgWait": "Avg wait time"
+  },
+  "store": {
+    "title": "Menu",
+    "subtitle": "Pick a dish — served to your seat",
+    "empty": "No items available."
+  },
+  "category": {
+    "all": "All",
+    "food": "Food",
+    "drinks": "Drinks",
+    "combo": "Combo"
+  },
+  "menuCard": {
+    "outOfStock": "Out of stock",
+    "prep": "~{{min}} min",
+    "add": "Add"
+  },
+  "cart": {
+    "title": "Cart",
+    "items": "{{count}} items",
+    "notePlaceholder": "Note (optional)",
+    "total": "Total",
+    "placeOrder": "ORDER NOW",
+    "placing": "PLACING...",
+    "orderSuccess": "Order placed!",
+    "orderError": "Couldn't place order. Please try again."
+  },
+  "orders": {
+    "title": "Orders",
+    "machine": "Machine {{no}}",
+    "enterMachine": "Please enter your machine number to view orders.",
+    "empty": "No orders yet."
+  },
+  "order": {
+    "statusReceived": "Received",
+    "statusPreparing": "Preparing",
+    "statusDelivering": "Delivering",
+    "statusDone": "Done",
+    "statusCancelled": "Cancelled",
+    "waited": "Waited {{time}}",
+    "eta": "~{{min}} min left",
+    "total": "Total"
+  },
+  "notify": {
+    "preparing": "Your order is being prepared!",
+    "delivering": "Your order is on the way!",
+    "done": "Your order has arrived! Enjoy 🎮",
+    "cancelled": "Your order was cancelled."
+  },
+  "esports": {
+    "title": "Esports",
+    "enterMachine": "Please enter your machine number to start a session.",
+    "yourSeat": "Your seat",
+    "seat": "Seat {{seat}}",
+    "playing": "PLAYING",
+    "playedTime": "Time played",
+    "extend": "EXTEND TIME",
+    "callStaff": "CALL STAFF",
+    "sessionStats": "Session stats",
+    "statFps": "Avg FPS",
+    "statPing": "Ping",
+    "statKda": "KDA",
+    "statRank": "Rank",
+    "assistTitle": "Call staff",
+    "assistConfirm": "Call staff to seat {{seat}}?",
+    "extendTitle": "Extend time",
+    "extendDesc": "Choose how long to extend for seat {{seat}}.",
+    "extendMinutes": "{{min}} min",
+    "staffBusy": "Staff are handling your request, please wait.",
+    "staffCalled": "Staff called, please wait.",
+    "requestFailed": "Couldn't send the request.",
+    "extendSent": "Sent a request to extend {{min}} min."
+  },
+  "quests": {
+    "title": "Quests",
+    "tier": "Membership tier",
+    "gold": "GOLD MEMBER",
+    "points": "Points",
+    "redeemVoucher": "REDEEM VOUCHER",
+    "dailyTasks": "Today's quests",
+    "timeLeft": "{{time}} left",
+    "enterMachine": "Please enter your machine number to redeem.",
+    "taskFirstOrder": "First F&B order",
+    "taskPlay3h": "Play 3 hours straight",
+    "taskReview": "Leave a review",
+    "taskInvite": "Invite friends"
+  },
+  "voucher": {
+    "title": "Redeem voucher",
+    "currentPoints": "Available points",
+    "yourCode": "Your voucher code",
+    "redeem": "Redeem",
+    "empty": "No vouchers yet.",
+    "redeemed": "Redeemed vouchers",
+    "success": "Redeemed successfully!",
+    "insufficient": "Not enough points for this voucher.",
+    "failed": "Redemption failed."
+  },
+  "review": {
+    "title": "Rate your experience",
+    "subtitle": "Share your thoughts about OEG Cyber Hub",
+    "reward": "🎁 10% OFF your next order",
+    "placeholder": "Tell us more about your experience...",
+    "submit": "SUBMIT REVIEW",
+    "submitting": "SUBMITTING...",
+    "skip": "Skip",
+    "chooseRating": "Please pick a rating.",
+    "thanks": "Thanks for your review! 🎉",
+    "error": "Couldn't submit review. Please try again."
+  },
+  "machine": {
+    "appName": "OEG Cyber Hub",
+    "prompt": "Enter your machine number to start",
+    "placeholder": "Machine number (e.g. 42)",
+    "confirm": "CONFIRM",
+    "invalid": "Please enter a valid machine number."
+  }
+}

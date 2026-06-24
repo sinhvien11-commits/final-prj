@@ -23,7 +23,7 @@ export function useQueue() {
             : 0,
         })
       },
-      (err) => { setError('Không thể tải trạng thái hàng chờ.'); console.error(err) }
+      (err) => { setError('errors.loadQueue'); console.error(err) }
     )
     return unsub
   }, [])

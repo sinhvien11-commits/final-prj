@@ -1,13 +1,16 @@
+import { useTranslation } from 'react-i18next'
+
 const STEPS = [
-  { key: 'received',   label: 'Đã nhận',   icon: 'receipt' },
-  { key: 'preparing',  label: 'Đang làm',  icon: 'restaurant' },
-  { key: 'delivering', label: 'Đang giao', icon: 'delivery_dining' },
-  { key: 'done',       label: 'Hoàn thành',icon: 'check_circle' },
+  { key: 'received',   labelKey: 'order.statusReceived',   icon: 'receipt' },
+  { key: 'preparing',  labelKey: 'order.statusPreparing',  icon: 'restaurant' },
+  { key: 'delivering', labelKey: 'order.statusDelivering', icon: 'delivery_dining' },
+  { key: 'done',       labelKey: 'order.statusDone',       icon: 'check_circle' },
 ]
 
 const ORDER = ['received', 'preparing', 'delivering', 'done']
 
 export default function OrderStepper({ status }) {
+  const { t } = useTranslation()
   const current = ORDER.indexOf(status)
 
   return (
@@ -24,7 +27,7 @@ export default function OrderStepper({ status }) {
                 </span>
               </div>
               <span className={`text-[9px] uppercase tracking-wider font-bold ${active ? 'text-primary-fixed' : done ? 'text-secondary' : 'text-surface-variant'}`}>
-                {step.label}
+                {t(step.labelKey)}
               </span>
             </div>
             {idx < STEPS.length - 1 && (

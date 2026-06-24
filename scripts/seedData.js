@@ -48,26 +48,26 @@ export const accounts = [
 //   isFeatured=true: cyber-beef-burger, pixel-pizza, cyber-energy-drink, combo-solo-queue
 export const menuSeed = [
   // ── FOOD ──────────────────────────────────────────────────────────────────
-  { slug: 'cyber-beef-burger',       name: 'Cyber Beef Burger',            category: 'food',   price: 85000,  prepMin: 15, inStock: true,  isFeatured: true,  imageSource: img('burger') },
-  { slug: 'crispy-gaming-wings',     name: 'Crispy Gaming Wings',          category: 'food',   price: 65000,  prepMin: 15, inStock: true,  isFeatured: false, imageSource: img('friedChicken') },
-  { slug: 'pixel-pizza',             name: 'Pixel Pizza (cá nhân)',        category: 'food',   price: 75000,  prepMin: 18, inStock: true,  isFeatured: true,  imageSource: img('pizza') },
-  { slug: 'mi-tron-overclock',       name: 'Mì Trộn Overclock',            category: 'food',   price: 45000,  prepMin: 10, inStock: true,  isFeatured: false, imageSource: img('noodles') },
-  { slug: 'khoai-tay-chien-plasma',  name: 'Khoai Tây Chiên Plasma',       category: 'food',   price: 35000,  prepMin: 8,  inStock: true,  isFeatured: false, imageSource: img('fries') },
-  { slug: 'com-ga-xoi-mo',           name: 'Cơm Gà Xối Mỡ GG',             category: 'food',   price: 55000,  prepMin: 12, inStock: false, isFeatured: false, imageSource: img('chickenRice') },
-  { slug: 'banh-mi-console',         name: 'Bánh Mì Console',              category: 'food',   price: 30000,  prepMin: 7,  inStock: true,  isFeatured: false, imageSource: img('banhMi') },
+  { slug: 'cyber-beef-burger',       name: 'Cyber Beef Burger',            nameEn: 'Cyber Beef Burger',         category: 'food',   price: 85000,  prepMin: 15, inStock: true,  isFeatured: true,  imageSource: img('burger') },
+  { slug: 'crispy-gaming-wings',     name: 'Crispy Gaming Wings',          nameEn: 'Crispy Gaming Wings',       category: 'food',   price: 65000,  prepMin: 15, inStock: true,  isFeatured: false, imageSource: img('friedChicken') },
+  { slug: 'pixel-pizza',             name: 'Pixel Pizza (cá nhân)',        nameEn: 'Pixel Pizza (Personal)',    category: 'food',   price: 75000,  prepMin: 18, inStock: true,  isFeatured: true,  imageSource: img('pizza') },
+  { slug: 'mi-tron-overclock',       name: 'Mì Trộn Overclock',            nameEn: 'Overclock Mixed Noodles',   category: 'food',   price: 45000,  prepMin: 10, inStock: true,  isFeatured: false, imageSource: img('noodles') },
+  { slug: 'khoai-tay-chien-plasma',  name: 'Khoai Tây Chiên Plasma',       nameEn: 'Plasma French Fries',       category: 'food',   price: 35000,  prepMin: 8,  inStock: true,  isFeatured: false, imageSource: img('fries') },
+  { slug: 'com-ga-xoi-mo',           name: 'Cơm Gà Xối Mỡ GG',             nameEn: 'GG Crispy Chicken Rice',    category: 'food',   price: 55000,  prepMin: 12, inStock: false, isFeatured: false, imageSource: img('chickenRice') },
+  { slug: 'banh-mi-console',         name: 'Bánh Mì Console',              nameEn: 'Console Banh Mi',           category: 'food',   price: 30000,  prepMin: 7,  inStock: true,  isFeatured: false, imageSource: img('banhMi') },
 
   // ── DRINKS ────────────────────────────────────────────────────────────────
-  { slug: 'cyber-energy-drink',      name: 'Cyber Energy Drink',           category: 'drinks', price: 35000,  prepMin: 3,  inStock: true,  isFeatured: true,  imageSource: img('icedTea') },
-  { slug: 'tra-dao-respawn',         name: 'Trà Đào Cam Sả Respawn',       category: 'drinks', price: 30000,  prepMin: 5,  inStock: true,  isFeatured: false, imageSource: img('icedTea') },
-  { slug: 'ca-phe-sua-da-lagfree',   name: 'Cà Phê Sữa Đá Lag-Free',       category: 'drinks', price: 25000,  prepMin: 5,  inStock: true,  isFeatured: false, imageSource: img('vnCoffee') },
-  { slug: 'soda-neon-blue',          name: 'Soda Neon Blue',               category: 'drinks', price: 28000,  prepMin: 3,  inStock: true,  isFeatured: false, imageSource: img('smoothie') },
-  { slug: 'sinh-to-mana-berry',      name: 'Sinh Tố Mana Berry',           category: 'drinks', price: 38000,  prepMin: 6,  inStock: false, isFeatured: false, imageSource: img('smoothie') },
-  { slug: 'nuoc-suoi',               name: 'Nước Suối',                    category: 'drinks', price: 10000,  prepMin: 1,  inStock: true,  isFeatured: false, imageSource: img('icedTea') },
+  { slug: 'cyber-energy-drink',      name: 'Cyber Energy Drink',           nameEn: 'Cyber Energy Drink',        category: 'drinks', price: 35000,  prepMin: 3,  inStock: true,  isFeatured: true,  imageSource: img('icedTea') },
+  { slug: 'tra-dao-respawn',         name: 'Trà Đào Cam Sả Respawn',       nameEn: 'Respawn Peach Tea',         category: 'drinks', price: 30000,  prepMin: 5,  inStock: true,  isFeatured: false, imageSource: img('icedTea') },
+  { slug: 'ca-phe-sua-da-lagfree',   name: 'Cà Phê Sữa Đá Lag-Free',       nameEn: 'Lag-Free Iced Milk Coffee', category: 'drinks', price: 25000,  prepMin: 5,  inStock: true,  isFeatured: false, imageSource: img('vnCoffee') },
+  { slug: 'soda-neon-blue',          name: 'Soda Neon Blue',               nameEn: 'Neon Blue Soda',            category: 'drinks', price: 28000,  prepMin: 3,  inStock: true,  isFeatured: false, imageSource: img('smoothie') },
+  { slug: 'sinh-to-mana-berry',      name: 'Sinh Tố Mana Berry',           nameEn: 'Mana Berry Smoothie',       category: 'drinks', price: 38000,  prepMin: 6,  inStock: false, isFeatured: false, imageSource: img('smoothie') },
+  { slug: 'nuoc-suoi',               name: 'Nước Suối',                    nameEn: 'Mineral Water',             category: 'drinks', price: 10000,  prepMin: 1,  inStock: true,  isFeatured: false, imageSource: img('icedTea') },
 
   // ── COMBO ─────────────────────────────────────────────────────────────────
-  { slug: 'combo-solo-queue',        name: 'Combo Solo Queue',             category: 'combo',  price: 110000, prepMin: 20, inStock: true,  isFeatured: true,  imageSource: img('burger') },
-  { slug: 'combo-team-ranked',       name: 'Combo Team Ranked (2 người)',  category: 'combo',  price: 195000, prepMin: 25, inStock: true,  isFeatured: false, imageSource: img('chickenRice') },
-  { slug: 'combo-night-owl',         name: 'Combo Night Owl (đồ ăn khuya)',category: 'combo',  price: 89000,  prepMin: 18, inStock: false, isFeatured: false, imageSource: img('noodles') },
+  { slug: 'combo-solo-queue',        name: 'Combo Solo Queue',             nameEn: 'Solo Queue Combo',          category: 'combo',  price: 110000, prepMin: 20, inStock: true,  isFeatured: true,  imageSource: img('burger') },
+  { slug: 'combo-team-ranked',       name: 'Combo Team Ranked (2 người)',  nameEn: 'Team Ranked Combo (2 pax)', category: 'combo',  price: 195000, prepMin: 25, inStock: true,  isFeatured: false, imageSource: img('chickenRice') },
+  { slug: 'combo-night-owl',         name: 'Combo Night Owl (đồ ăn khuya)',nameEn: 'Night Owl Combo',           category: 'combo',  price: 89000,  prepMin: 18, inStock: false, isFeatured: false, imageSource: img('noodles') },
 ]
 
 // ───────────────────────────────────────────────────────────────────────────

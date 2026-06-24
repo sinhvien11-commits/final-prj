@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { collection, query, where, onSnapshot, doc, runTransaction, serverTimestamp } from 'firebase/firestore'
 import toast from 'react-hot-toast'
 import { db } from '../lib/firebase'
@@ -12,6 +13,7 @@ function genCode() {
 }
 
 export default function VoucherModal({ machineNo, balance, onClose }) {
+  const { t } = useTranslation()
   const [vouchers, setVouchers] = useState([])
   const [history, setHistory]   = useState([])
   const [busyId, setBusyId]     = useState(null)
@@ -61,10 +63,10 @@ export default function VoucherModal({ machineNo, balance, onClose }) {
         })
       })
       setLastCode({ name: voucher.name, code })
-      toast.success('Đổi thành công!')
+      toast.success(t('voucher.success'))
     } catch (e) {
-      if (e.message === 'INSUFFICIENT') toast.error('Bạn không đủ điểm để đổi voucher này.')
-      else { toast.error('Đổi voucher thất bại.'); console.error(e) }
+      if (e.message === 'INSUFFICIENT') toast.error(t('voucher.insufficient'))
+      else { toast.error(t('voucher.failed')); console.error(e) }
     } finally {
       setBusyId(null)
     }
@@ -77,20 +79,20 @@ export default function VoucherModal({ machineNo, balance, onClose }) {
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex items-center justify-between">
-          <h3 className="font-display font-bold text-lg text-primary uppercase tracking-tight">Đổi voucher</h3>
+          <h3 className="font-display font-bold text-lg text-primary uppercase tracking-tight">{t('voucher.title')}</h3>
           <button onClick={onClose} className="text-secondary hover:text-primary">
             <span className="material-symbols-outlined">close</span>
           </button>
         </div>
 
         <div className="bg-surface-container rounded-xl p-4 flex items-center justify-between">
-          <span className="text-secondary text-sm">Điểm hiện có</span>
+          <span className="text-secondary text-sm">{t('voucher.currentPoints')}</span>
           <span className="font-display font-black text-2xl text-primary-fixed">{balance ?? '—'} pts</span>
         </div>
 
         {lastCode && (
           <div className="bg-primary-fixed/10 border border-primary-fixed rounded-xl p-4 text-center">
-            <p className="text-secondary text-xs uppercase tracking-wider">Mã voucher của bạn</p>
+            <p className="text-secondary text-xs uppercase tracking-wider">{t('voucher.yourCode')}</p>
             <p className="font-display font-black text-3xl text-primary-fixed tracking-[0.3em] mt-1">{lastCode.code}</p>
             <p className="text-secondary text-xs mt-1">{lastCode.name}</p>
           </div>
@@ -110,19 +112,19 @@ export default function VoucherModal({ machineNo, balance, onClose }) {
                   disabled={busyId === v.id || !affordable}
                   className="bg-primary-fixed text-black text-xs font-bold uppercase px-4 py-2 rounded-lg hover:bg-primary-fixed-dim transition-colors disabled:opacity-40 disabled:pointer-events-none"
                 >
-                  Đổi
+                  {t('voucher.redeem')}
                 </button>
               </div>
             )
           })}
           {vouchers.length === 0 && (
-            <p className="text-secondary text-sm text-center py-4">Chưa có voucher nào.</p>
+            <p className="text-secondary text-sm text-center py-4">{t('voucher.empty')}</p>
           )}
         </div>
 
         {history.length > 0 && (
           <div className="flex flex-col gap-2">
-            <h4 className="text-secondary text-xs uppercase tracking-wider">Voucher đã đổi</h4>
+            <h4 className="text-secondary text-xs uppercase tracking-wider">{t('voucher.redeemed')}</h4>
             {history.map((h) => (
               <div key={h.id} className="flex items-center justify-between text-sm border-b border-surface-container-high pb-2 last:border-0">
                 <span className="text-on-surface">{h.name}</span>

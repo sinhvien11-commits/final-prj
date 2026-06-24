@@ -1,11 +1,14 @@
+import { useTranslation } from 'react-i18next'
+
 const CATEGORIES = [
-  { value: 'all',    label: 'Tất cả' },
-  { value: 'food',   label: 'Đồ ăn' },
-  { value: 'drinks', label: 'Nước' },
-  { value: 'combo',  label: 'Combo' },
+  { value: 'all',    key: 'all' },
+  { value: 'food',   key: 'food' },
+  { value: 'drinks', key: 'drinks' },
+  { value: 'combo',  key: 'combo' },
 ]
 
 export default function CategoryFilter({ active, onChange }) {
+  const { t } = useTranslation()
   return (
     <div className="flex gap-2 overflow-x-auto hide-scrollbar py-1">
       {CATEGORIES.map((cat) => (
@@ -18,7 +21,7 @@ export default function CategoryFilter({ active, onChange }) {
               : 'bg-surface-container text-secondary hover:bg-surface-variant'
           }`}
         >
-          {cat.label}
+          {t(`category.${cat.key}`)}
         </button>
       ))}
     </div>

@@ -26,7 +26,7 @@ export function useOrders(machineNo) {
         setError(null)
         setOrders(snap.docs.map((d) => ({ id: d.id, ...d.data() })))
       },
-      (err) => { setError('Không thể tải đơn hàng.'); console.error(err) }
+      (err) => { setError('errors.loadOrders'); console.error(err) }
     )
     return unsub
   }, [machineNo])
