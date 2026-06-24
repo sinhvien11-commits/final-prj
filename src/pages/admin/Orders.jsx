@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { collection, query, where, orderBy, onSnapshot, updateDoc, doc } from 'firebase/firestore'
+import { collection, query, where, orderBy, onSnapshot, updateDoc, doc, runTransaction } from 'firebase/firestore'
 import { serverTimestamp } from 'firebase/firestore'
 import toast from 'react-hot-toast'
 import { db } from '../../lib/firebase'
@@ -44,16 +44,38 @@ export default function AdminOrders() {
   async function advanceStatus(order) {
     const next = NEXT_STATUS[order.status]
     if (!next) return
-    const update = { status: next, updatedAt: serverTimestamp() }
-    if (order.status === 'received') {
-      update.waitMin = Number(waitInputs[order.id] ?? 15)
-    }
     try {
-      await updateDoc(doc(db, 'orders', order.id), update)
+      if (next === 'done') {
+        await completeOrder(order)
+      } else {
+        const update = { status: next, updatedAt: serverTimestamp() }
+        if (order.status === 'received') {
+          update.waitMin = Number(waitInputs[order.id] ?? 15)
+        }
+        await updateDoc(doc(db, 'orders', order.id), update)
+      }
     } catch (err) {
       toast.error('Không thể cập nhật đơn hàng.')
       console.error(err)
     }
+  }
+
+  // Hoàn tất đơn + cộng floor(total/1000) điểm cho máy, trong 1 transaction.
+  // Cờ pointsAwarded đảm bảo không cộng trùng nếu bấm "Đã giao xong" nhiều lần.
+  async function completeOrder(order) {
+    const orderRef  = doc(db, 'orders', order.id)
+    const pointsRef = doc(db, 'points', String(order.machineNo))
+    await runTransaction(db, async (tx) => {
+      const orderSnap = await tx.get(orderRef)
+      if (!orderSnap.exists()) return
+      const o = orderSnap.data()
+      if (o.status === 'done' && o.pointsAwarded) return // đã cộng rồi
+      const pointsSnap = await tx.get(pointsRef)
+      const earned = Math.floor((o.total ?? 0) / 1000)
+      const base   = pointsSnap.exists() ? pointsSnap.data().balance : 100 // 100 = thưởng chào mừng lần đầu
+      tx.set(pointsRef, { balance: base + earned, updatedAt: serverTimestamp() }, { merge: true })
+      tx.update(orderRef, { status: 'done', updatedAt: serverTimestamp(), pointsAwarded: true })
+    })
   }
 
   async function cancelOrder(order) {

@@ -70,6 +70,19 @@ export const menuSeed = [
   { slug: 'combo-night-owl',         name: 'Combo Night Owl (đồ ăn khuya)',category: 'combo',  price: 89000,  prepMin: 18, inStock: false, isFeatured: false, imageSource: img('noodles') },
 ]
 
+// ───────────────────────────────────────────────────────────────────────────
+// VOUCHERS (collection vouchers) — catalog đổi điểm
+// ───────────────────────────────────────────────────────────────────────────
+//   type: 'amount'   → value = số tiền giảm (đ)
+//         'percent'  → value = % giảm trên hoá đơn
+//         'freeItem' → value = slug món được tặng
+export const voucherSeed = [
+  { name: 'Giảm 10.000đ',     cost: 50,  type: 'amount',   value: 10000,      active: true },
+  { name: 'Free Nước Suối',   cost: 30,  type: 'freeItem', value: 'nuoc-suoi', active: true },
+  { name: 'Giảm 10% hóa đơn', cost: 80,  type: 'percent',  value: 10,         active: true },
+  { name: 'Combo giảm 20k',   cost: 120, type: 'amount',   value: 20000,      active: true },
+]
+
 // Tiện cho seed.js nếu muốn build orders combo "thật" hơn (không bắt buộc).
 export const comboContents = {
   'combo-solo-queue':  ['cyber-beef-burger', 'khoai-tay-chien-plasma', 'cyber-energy-drink'],

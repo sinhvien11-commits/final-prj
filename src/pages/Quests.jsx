@@ -1,4 +1,8 @@
 import { useState, useEffect } from 'react'
+import toast from 'react-hot-toast'
+import { useCart } from '../context/CartContext'
+import { usePoints } from '../hooks/usePoints'
+import VoucherModal from '../components/VoucherModal'
 import ProgressBar from '../components/ui/ProgressBar'
 import Button from '../components/ui/Button'
 import TopAppBar from '../components/layout/TopAppBar'
@@ -17,11 +21,20 @@ function countdown(ms) {
 }
 
 export default function Quests() {
+  const { machineNo } = useCart()
+  const balance = usePoints(machineNo)
+  const [voucherOpen, setVoucherOpen] = useState(false)
+
   const [remaining, setRemaining] = useState(() => {
     const end = new Date()
     end.setHours(23, 59, 59, 999)
     return end.getTime() - Date.now()
   })
+
+  function openVoucher() {
+    if (!machineNo) { toast.error('Vui lòng nhập số máy để đổi voucher.'); return }
+    setVoucherOpen(true)
+  }
 
   useEffect(() => {
     const id = setInterval(() => setRemaining((p) => Math.max(0, p - 1000)), 1000)
@@ -45,9 +58,11 @@ export default function Quests() {
           <div className="flex items-center justify-between">
             <div>
               <p className="text-secondary text-xs">Điểm tích lũy</p>
-              <p className="font-display font-black text-2xl text-primary">1,240 pts</p>
+              <p className="font-display font-black text-2xl text-primary">
+                {machineNo ? `${balance ?? '...'} pts` : '— pts'}
+              </p>
             </div>
-            <Button variant="secondary" className="!w-auto px-4 py-2 text-xs">ĐỔI VOUCHER</Button>
+            <Button variant="secondary" className="!w-auto px-4 py-2 text-xs" onClick={openVoucher}>ĐỔI VOUCHER</Button>
           </div>
         </div>
 
@@ -89,6 +104,10 @@ export default function Quests() {
         </div>
 
       </div>
+
+      {voucherOpen && (
+        <VoucherModal machineNo={machineNo} balance={balance} onClose={() => setVoucherOpen(false)} />
+      )}
     </>
   )
 }

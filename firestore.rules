@@ -30,6 +30,20 @@ service cloud.firestore {
       allow delete: if isAdmin();
     }
 
+    // Loyalty: vouchers catalog (read-only cho khách, admin quản lý), điểm và
+    // lượt đổi theo máy. Đơn giản hoá: khách được đọc/ghi points & redemptions để
+    // chạy được transaction đổi điểm (bảo vệ chặt hơn để sau).
+    match /vouchers/{id} {
+      allow read:  if true;
+      allow write: if isAdmin();
+    }
+    match /points/{machineNo} {
+      allow read, write: if true;
+    }
+    match /redemptions/{id} {
+      allow read, create: if true;
+    }
+
     // Service requests from the customer screen. Anyone (guest) can create a
     // valid request; only signed-in staff (kitchen/admin) can read & resolve.
     match /serviceRequests/{id} {

@@ -23,7 +23,7 @@ import { initializeApp, cert } from 'firebase-admin/app'
 import { getFirestore, Timestamp } from 'firebase-admin/firestore'
 import { getAuth } from 'firebase-admin/auth'
 
-import { accounts, menuSeed } from './seedData.js'
+import { accounts, menuSeed, voucherSeed } from './seedData.js'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const RESET  = process.argv.includes('--reset')
@@ -94,6 +94,12 @@ async function resolveImage(slug, imageSource) {
 // ───────────────────────────────────────────────────────────────────────────
 async function seedMenu() {
   console.log('\n📋 Seeding menu...')
+  // Idempotent: nếu đã có menu thì giữ nguyên (tránh nhân đôi khi chạy lại).
+  const existing = await db.collection('menuItems').get()
+  if (!existing.empty) {
+    console.log(`   = đã có ${existing.size} món, bỏ qua.`)
+    return existing.docs.map((d) => ({ id: d.id, ...d.data() }))
+  }
   const created = [] // để build orders sau (cần id thật)
   let imgOk = 0
 
@@ -161,6 +167,12 @@ function buildOrderItems(menuDocs) {
 
 async function seedOrders(menuDocs) {
   console.log('\n🧾 Seeding đơn hàng giả...')
+  // Idempotent: đã có đơn thì bỏ qua để không nhân đôi dữ liệu.
+  const existing = await db.collection('orders').get()
+  if (!existing.empty) {
+    console.log(`   = đã có ${existing.size} đơn, bỏ qua.`)
+    return 0
+  }
 
   // status → cách đặt thời gian tạo
   const plan = [
@@ -196,22 +208,44 @@ async function seedOrders(menuDocs) {
 }
 
 // ───────────────────────────────────────────────────────────────────────────
+// SEED VOUCHERS (collection vouchers) — idempotent theo name
+// ───────────────────────────────────────────────────────────────────────────
+async function seedVouchers() {
+  console.log('\n🎟️  Seeding vouchers...')
+  const existing = await db.collection('vouchers').get()
+  const names = new Set(existing.docs.map((d) => d.data().name))
+  let n = 0
+  for (const v of voucherSeed) {
+    if (names.has(v.name)) {
+      console.log(`   = ${v.name} đã có, bỏ qua.`)
+      continue
+    }
+    await db.collection('vouchers').add({ ...v, createdAt: Timestamp.now() })
+    console.log(`   + ${v.name} (${v.cost} pts)`)
+    n++
+  }
+  return n
+}
+
+// ───────────────────────────────────────────────────────────────────────────
 // MAIN
 // ───────────────────────────────────────────────────────────────────────────
 async function main() {
   if (RESET) {
-    console.log('\n🗑️  --reset: xoá menuItems + orders cũ...')
+    console.log('\n🗑️  --reset: xoá menuItems + orders + vouchers cũ...')
     const m = await clearCollection('menuItems')
     const o = await clearCollection('orders')
-    console.log(`   → xoá ${m} menu, ${o} đơn.`)
+    const v = await clearCollection('vouchers')
+    console.log(`   → xoá ${m} menu, ${o} đơn, ${v} voucher.`)
   }
 
   const menuDocs = await seedMenu()
   const accCount = await seedAccounts()
   const ordCount = await seedOrders(menuDocs)
+  const vouCount = await seedVouchers()
 
   console.log('\n✅ Seed xong.')
-  console.log(`   Tài khoản: ${accCount} mới | Menu: ${menuDocs.length} | Đơn: ${ordCount}`)
+  console.log(`   Tài khoản: ${accCount} mới | Menu: ${menuDocs.length} | Đơn: ${ordCount} | Voucher: ${vouCount} mới`)
   if (TARGET === 'cloud') {
     console.log('   Đăng nhập admin: ' + accounts[0].email + ' / ' + accounts[0].password)
   }
