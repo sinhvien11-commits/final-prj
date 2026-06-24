@@ -30,6 +30,17 @@ service cloud.firestore {
       allow delete: if isAdmin();
     }
 
+    // Play-time session per machine (doc id = machineNo). Guests (not signed in)
+    // need to start/refresh their own session, mirroring how orders allow guest
+    // creates — writes are gated on a valid shape only. Delete is denied
+    // (request.resource.data is null → the field checks fail).
+    match /playSessions/{machineNo} {
+      allow read: if true;
+      allow write: if request.resource.data.machineNo is number
+        && request.resource.data.startedAt is timestamp
+        && request.resource.data.dayKey is string;
+    }
+
     match /profiles/{uid} {
       // Fix 1: non-admin cannot change the role field (prevent self-promote)
       allow update: if request.auth != null

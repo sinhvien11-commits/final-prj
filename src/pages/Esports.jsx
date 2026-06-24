@@ -1,5 +1,8 @@
 import { useState, useEffect } from 'react'
+import { doc, getDoc, setDoc, Timestamp } from 'firebase/firestore'
 import { useCart } from '../context/CartContext'
+import { db } from '../lib/firebase'
+import { useElapsed } from '../hooks/useElapsed'
 import Badge from '../components/ui/Badge'
 import Button from '../components/ui/Button'
 import TopAppBar from '../components/layout/TopAppBar'
@@ -11,14 +14,52 @@ function fmt(secs) {
   return `${h}:${m}:${s}`
 }
 
+// dayKey "YYYY-MM-DD" theo giờ VN (Asia/Ho_Chi_Minh) — dùng để reset phiên qua ngày.
+function vnDayKey(date = new Date()) {
+  return new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Ho_Chi_Minh' }).format(date)
+}
+
 export default function Esports() {
   const { machineNo } = useCart()
-  const [elapsed, setElapsed] = useState(0)
+  const [startedAt, setStartedAt] = useState(null) // epoch ms, từ Firestore
 
+  // Mở/khôi phục phiên chơi theo máy, lưu Firestore để sống qua F5 / đổi máy.
   useEffect(() => {
-    const id = setInterval(() => setElapsed((p) => p + 1), 1000)
-    return () => clearInterval(id)
-  }, [])
+    if (!machineNo) { setStartedAt(null); return }
+    let cancelled = false
+    const ref = doc(db, 'playSessions', String(machineNo))
+    const today = vnDayKey()
+    ;(async () => {
+      try {
+        const snap = await getDoc(ref)
+        if (!snap.exists() || snap.data().dayKey !== today) {
+          // Chưa có phiên hoặc đã sang ngày mới → bắt đầu phiên mới.
+          const now = Timestamp.now()
+          await setDoc(ref, { machineNo: Number(machineNo), startedAt: now, dayKey: today })
+          if (!cancelled) setStartedAt(now.toMillis())
+        } else if (!cancelled) {
+          // Phiên hôm nay đã tồn tại → giữ nguyên startedAt.
+          setStartedAt(snap.data().startedAt.toMillis())
+        }
+      } catch (e) {
+        console.error(e)
+      }
+    })()
+    return () => { cancelled = true }
+  }, [machineNo])
+
+  const elapsed = useElapsed(startedAt)
+
+  if (!machineNo) {
+    return (
+      <>
+        <TopAppBar title="Esports" />
+        <div className="pt-16 pb-20 px-4 flex items-center justify-center min-h-screen">
+          <p className="text-secondary text-center">Vui lòng nhập số máy để bắt đầu phiên chơi.</p>
+        </div>
+      </>
+    )
+  }
 
   return (
     <>
