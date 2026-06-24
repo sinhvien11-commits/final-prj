@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { collection, query, where, orderBy, onSnapshot } from 'firebase/firestore'
+import { collection, query, where, orderBy, onSnapshot, Timestamp } from 'firebase/firestore'
 import { db } from '../lib/firebase'
 
 export function useOrders(machineNo) {
@@ -8,15 +8,24 @@ export function useOrders(machineNo) {
 
   useEffect(() => {
     if (!machineNo) return
+    // Only today's orders (from local midnight). All statuses are kept —
+    // including "done"/"cancelled" — so completed orders stay visible.
+    const startOfToday = new Date()
+    startOfToday.setHours(0, 0, 0, 0)
     const q = query(
       collection(db, 'orders'),
       where('machineNo', '==', Number(machineNo)),
-      where('status', 'in', ['received', 'preparing', 'delivering']),
+      where('createdAt', '>=', Timestamp.fromDate(startOfToday)),
       orderBy('createdAt', 'desc')
     )
     const unsub = onSnapshot(
       q,
-      (snap) => setOrders(snap.docs.map((d) => ({ id: d.id, ...d.data() }))),
+      (snap) => {
+        // A successful snapshot means the query is healthy — clear any stale
+        // error from a previous failed fetch before showing the data.
+        setError(null)
+        setOrders(snap.docs.map((d) => ({ id: d.id, ...d.data() })))
+      },
       (err) => { setError('Không thể tải đơn hàng.'); console.error(err) }
     )
     return unsub

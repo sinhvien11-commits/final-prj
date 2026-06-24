@@ -1,18 +1,23 @@
 import OrderStepper from './OrderStepper'
 
 const STATUS_LABEL = {
-  received:   { text: 'Đã nhận đơn',     color: 'text-secondary' },
-  preparing:  { text: 'Đang chuẩn bị',   color: 'text-primary-fixed' },
-  delivering: { text: 'Đang giao hàng',  color: 'text-primary-fixed' },
-  done:       { text: 'Đã giao xong',    color: 'text-secondary' },
-  cancelled:  { text: 'Đã hủy',          color: 'text-error' },
+  received:   { text: 'Đã nhận',    color: 'text-secondary' },
+  preparing:  { text: 'Đang làm',   color: 'text-primary-fixed' },
+  delivering: { text: 'Đang giao',  color: 'text-primary-fixed' },
+  done:       { text: 'Hoàn thành', color: 'text-secondary' },
+  cancelled:  { text: 'Đã huỷ',     color: 'text-error' },
 }
+
+// Completed / cancelled orders stay visible but are dimmed to separate them
+// from orders still being processed.
+const MUTED_STATUS = new Set(['done', 'cancelled'])
 
 export default function OrderTracker({ order }) {
   const statusInfo = STATUS_LABEL[order.status] ?? { text: order.status, color: 'text-secondary' }
+  const muted = MUTED_STATUS.has(order.status)
 
   return (
-    <div className="bg-surface border border-surface-container-high rounded-xl p-4 flex flex-col gap-3">
+    <div className={`bg-surface border border-surface-container-high rounded-xl p-4 flex flex-col gap-3 ${muted ? 'opacity-60' : ''}`}>
       <div className="flex items-center justify-between">
         <div>
           <p className="text-secondary text-xs uppercase tracking-wider">Máy {order.machineNo}</p>
