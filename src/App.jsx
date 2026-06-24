@@ -16,6 +16,7 @@ import Review  from './pages/Review'
 
 import AdminLogin    from './pages/admin/Login'
 import AdminOrders   from './pages/admin/Orders'
+import AdminRequests from './pages/admin/Requests'
 import AdminMenu     from './pages/admin/Menu'
 import AdminMenuEdit from './pages/admin/MenuEdit'
 import AdminOverview from './pages/admin/Overview'
@@ -71,6 +72,7 @@ export default function App() {
                 <Routes>
                   <Route index             element={<RequireAuth allowedRoles={['admin']}><AdminOverview /></RequireAuth>} />
                   <Route path="orders"     element={<AdminOrders />} />
+                  <Route path="requests"   element={<RequireAuth allowedRoles={['admin','kitchen']}><AdminRequests /></RequireAuth>} />
                   <Route path="menu"       element={<RequireAuth allowedRoles={['admin']}><AdminMenu /></RequireAuth>} />
                   <Route path="menu/:id"   element={<RequireAuth allowedRoles={['admin']}><AdminMenuEdit /></RequireAuth>} />
                   <Route path="reports"    element={<RequireAuth allowedRoles={['admin']}><AdminReports /></RequireAuth>} />

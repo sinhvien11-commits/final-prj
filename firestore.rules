@@ -30,6 +30,15 @@ service cloud.firestore {
       allow delete: if isAdmin();
     }
 
+    // Service requests from the customer screen. Anyone (guest) can create a
+    // valid request; only signed-in staff (kitchen/admin) can read & resolve.
+    match /serviceRequests/{id} {
+      allow create: if request.resource.data.machineNo is number
+        && request.resource.data.type in ['extend', 'assist']
+        && request.resource.data.status == 'pending';
+      allow read, update: if isKitchenOrAdmin();
+    }
+
     // Play-time session per machine (doc id = machineNo). Guests (not signed in)
     // need to start/refresh their own session, mirroring how orders allow guest
     // creates — writes are gated on a valid shape only. Delete is denied

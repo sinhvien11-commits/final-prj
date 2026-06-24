@@ -1,11 +1,14 @@
 import { useState, useEffect } from 'react'
-import { doc, getDoc, setDoc, Timestamp } from 'firebase/firestore'
+import { doc, getDoc, setDoc, addDoc, collection, serverTimestamp, Timestamp } from 'firebase/firestore'
+import toast from 'react-hot-toast'
 import { useCart } from '../context/CartContext'
 import { db } from '../lib/firebase'
 import { useElapsed } from '../hooks/useElapsed'
 import Badge from '../components/ui/Badge'
 import Button from '../components/ui/Button'
 import TopAppBar from '../components/layout/TopAppBar'
+
+const ASSIST_COOLDOWN_MS = 2 * 60 * 1000 // chặn spam gọi nhân viên trong 2 phút
 
 function fmt(secs) {
   const h = String(Math.floor(secs / 3600)).padStart(2, '0')
@@ -50,6 +53,57 @@ export default function Esports() {
 
   const elapsed = useElapsed(startedAt)
 
+  const [modal, setModal]               = useState(null) // 'assist' | 'extend' | null
+  const [submitting, setSubmitting]     = useState(false)
+  // In-memory throttle: khách (chưa đăng nhập) không có quyền read serviceRequests
+  // nên không thể query đơn pending — chặn spam ngay trong phiên bằng cooldown.
+  const [assistCooldownUntil, setAssistCooldownUntil] = useState(0)
+
+  async function createRequest(extra) {
+    await addDoc(collection(db, 'serviceRequests'), {
+      machineNo: Number(machineNo),
+      note:      '',
+      status:    'pending',
+      createdAt: serverTimestamp(),
+      updatedAt: serverTimestamp(),
+      ...extra,
+    })
+  }
+
+  async function confirmAssist() {
+    if (Date.now() < assistCooldownUntil) {
+      toast('Nhân viên đang xử lý yêu cầu của bạn, vui lòng đợi.')
+      setModal(null)
+      return
+    }
+    setSubmitting(true)
+    try {
+      await createRequest({ type: 'assist' })
+      setAssistCooldownUntil(Date.now() + ASSIST_COOLDOWN_MS)
+      toast.success('Đã gọi nhân viên, vui lòng đợi.')
+      setModal(null)
+    } catch (e) {
+      toast.error('Không gửi được yêu cầu.')
+      console.error(e)
+    } finally {
+      setSubmitting(false)
+    }
+  }
+
+  async function submitExtend(minutes) {
+    setSubmitting(true)
+    try {
+      await createRequest({ type: 'extend', minutes })
+      toast.success(`Đã gửi yêu cầu gia hạn ${minutes} phút.`)
+      setModal(null)
+    } catch (e) {
+      toast.error('Không gửi được yêu cầu.')
+      console.error(e)
+    } finally {
+      setSubmitting(false)
+    }
+  }
+
   if (!machineNo) {
     return (
       <>
@@ -85,8 +139,8 @@ export default function Esports() {
           </div>
 
           <div className="flex flex-col gap-2">
-            <Button variant="primary">GIA HẠN THÊM GIỜ</Button>
-            <Button variant="ghost">GỌI HỖ TRỢ KỸ THUẬT</Button>
+            <Button variant="primary" onClick={() => setModal('extend')}>GIA HẠN THÊM GIỜ</Button>
+            <Button variant="ghost" onClick={() => setModal('assist')}>GỌI NHÂN VIÊN</Button>
           </div>
         </div>
 
@@ -110,6 +164,50 @@ export default function Esports() {
         </div>
 
       </div>
+
+      {modal === 'assist' && (
+        <Modal onClose={() => !submitting && setModal(null)}>
+          <h3 className="font-display font-bold text-lg text-primary uppercase tracking-tight">Gọi nhân viên</h3>
+          <p className="text-secondary text-sm">Xác nhận gọi nhân viên đến ghế A{machineNo}?</p>
+          <div className="flex gap-2">
+            <Button variant="ghost" onClick={() => setModal(null)} disabled={submitting}>Huỷ</Button>
+            <Button variant="primary" onClick={confirmAssist} disabled={submitting}>Xác nhận</Button>
+          </div>
+        </Modal>
+      )}
+
+      {modal === 'extend' && (
+        <Modal onClose={() => !submitting && setModal(null)}>
+          <h3 className="font-display font-bold text-lg text-primary uppercase tracking-tight">Gia hạn thêm giờ</h3>
+          <p className="text-secondary text-sm">Chọn thời lượng gia hạn cho ghế A{machineNo}.</p>
+          <div className="grid grid-cols-3 gap-2">
+            {[15, 30, 60].map((m) => (
+              <button
+                key={m}
+                onClick={() => submitExtend(m)}
+                disabled={submitting}
+                className="bg-surface-container hover:bg-primary-fixed hover:text-black text-primary font-bold py-4 rounded-xl transition-colors disabled:opacity-50"
+              >
+                {m} phút
+              </button>
+            ))}
+          </div>
+          <Button variant="ghost" onClick={() => setModal(null)} disabled={submitting}>Đóng</Button>
+        </Modal>
+      )}
     </>
+  )
+}
+
+function Modal({ children, onClose }) {
+  return (
+    <div className="fixed inset-0 z-50 flex items-end justify-center bg-black/60" onClick={onClose}>
+      <div
+        className="w-full max-w-[480px] bg-surface border-t border-surface-container-high rounded-t-2xl p-5 flex flex-col gap-4"
+        onClick={(e) => e.stopPropagation()}
+      >
+        {children}
+      </div>
+    </div>
   )
 }

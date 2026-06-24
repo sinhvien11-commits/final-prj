@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { collection, query, where, orderBy, onSnapshot, updateDoc, doc } from 'firebase/firestore'
 import { serverTimestamp } from 'firebase/firestore'
 import toast from 'react-hot-toast'
@@ -20,6 +21,7 @@ const NEXT_STATUS = {
 const WAIT_OPTIONS = [5, 10, 15, 20]
 
 export default function AdminOrders() {
+  const navigate = useNavigate()
   const [allOrders, setAllOrders] = useState([])
   const [waitInputs, setWaitInputs] = useState({})
 
@@ -68,11 +70,20 @@ export default function AdminOrders() {
 
   return (
     <div className="min-h-screen bg-background p-6">
-      <div className="mb-6">
-        <h1 className="font-display font-black text-2xl uppercase tracking-tight text-primary">
-          Kitchen Board
-        </h1>
-        <p className="text-secondary text-sm mt-1">{allOrders.length} đơn đang xử lý</p>
+      <div className="mb-6 flex items-center justify-between">
+        <div>
+          <h1 className="font-display font-black text-2xl uppercase tracking-tight text-primary">
+            Kitchen Board
+          </h1>
+          <p className="text-secondary text-sm mt-1">{allOrders.length} đơn đang xử lý</p>
+        </div>
+        <button
+          onClick={() => navigate('/admin/requests')}
+          className="flex items-center gap-1 bg-surface-container text-primary text-sm font-bold px-4 py-2 rounded-lg hover:bg-surface-variant transition-colors"
+        >
+          <span className="material-symbols-outlined text-[18px]">room_service</span>
+          Yêu cầu phục vụ
+        </button>
       </div>
 
       <div className="grid grid-cols-3 gap-4">
