@@ -1,8 +1,10 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { signInWithEmailAndPassword } from 'firebase/auth'
-import { auth } from '../../lib/firebase'
+import { doc, getDoc } from 'firebase/firestore'
+import { auth, db } from '../../lib/firebase'
 import { getAuthError } from '../../lib/authErrors'
+import { roleHome } from '../../lib/roleHome'
 import Button from '../../components/ui/Button'
 
 export default function AdminLogin() {
@@ -17,8 +19,10 @@ export default function AdminLogin() {
     setError('')
     setLoading(true)
     try {
-      await signInWithEmailAndPassword(auth, email, password)
-      navigate('/admin')
+      const cred = await signInWithEmailAndPassword(auth, email, password)
+      const snap = await getDoc(doc(db, 'profiles', cred.user.uid))
+      const role = snap.exists() ? snap.data().role : null
+      navigate(roleHome(role))
     } catch (err) {
       setError(getAuthError(err.code))
     } finally {
