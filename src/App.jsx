@@ -4,6 +4,7 @@ import { Toaster } from 'react-hot-toast'
 import ErrorBoundary from './components/layout/ErrorBoundary'
 import RequireAuth from './components/layout/RequireAuth'
 import BottomNav from './components/layout/BottomNav'
+import AdminNav from './components/layout/AdminNav'
 import { CartProvider } from './context/CartContext'
 import { SoundProvider } from './context/SoundContext'
 import MachineModal from './components/MachineModal'
@@ -70,16 +71,19 @@ export default function App() {
           <Route path="/admin/login" element={<ErrorBoundary><AdminLogin /></ErrorBoundary>} />
           <Route path="/admin/*" element={
             <RequireAuth allowedRoles={['kitchen','admin']}>
-              <ErrorBoundary>
-                <Routes>
-                  <Route index             element={<RequireAuth allowedRoles={['admin']}><AdminOverview /></RequireAuth>} />
-                  <Route path="orders"     element={<AdminOrders />} />
-                  <Route path="requests"   element={<RequireAuth allowedRoles={['admin','kitchen']}><AdminRequests /></RequireAuth>} />
-                  <Route path="menu"       element={<RequireAuth allowedRoles={['admin']}><AdminMenu /></RequireAuth>} />
-                  <Route path="menu/:id"   element={<RequireAuth allowedRoles={['admin']}><AdminMenuEdit /></RequireAuth>} />
-                  <Route path="reports"    element={<RequireAuth allowedRoles={['admin']}><AdminReports /></RequireAuth>} />
-                </Routes>
-              </ErrorBoundary>
+              <>
+                <AdminNav />
+                <ErrorBoundary>
+                  <Routes>
+                    <Route index             element={<RequireAuth allowedRoles={['admin']}><AdminOverview /></RequireAuth>} />
+                    <Route path="orders"     element={<AdminOrders />} />
+                    <Route path="requests"   element={<RequireAuth allowedRoles={['admin','kitchen']}><AdminRequests /></RequireAuth>} />
+                    <Route path="menu"       element={<RequireAuth allowedRoles={['admin']}><AdminMenu /></RequireAuth>} />
+                    <Route path="menu/:id"   element={<RequireAuth allowedRoles={['admin']}><AdminMenuEdit /></RequireAuth>} />
+                    <Route path="reports"    element={<RequireAuth allowedRoles={['admin']}><AdminReports /></RequireAuth>} />
+                  </Routes>
+                </ErrorBoundary>
+              </>
             </RequireAuth>
           } />
         </Routes>
